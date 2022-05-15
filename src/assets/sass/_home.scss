@@ -23,12 +23,12 @@
 }
 
 .image-part{
-    width: 100%;
-    height: 250px;
+    width: 700px;
+    height: 708px;
     opacity: .7;
     img{
         width: 100%;
-        height: 100%;
+        height: 708px;
     }
 }
 
@@ -36,7 +36,7 @@ section{
     margin-top: 50px;
     .row{
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         margin-bottom: 100px;
         button{
             width: 300px;
@@ -44,6 +44,7 @@ section{
             cursor: pointer;
             font-size: 30px;
             border-radius: 10px;
+            margin-left: 30px;
             background: #fff;
             i{
                 font-size: 35px;
@@ -68,4 +69,8 @@ section{
             @include section-btns(#E7A03C);
         }
     }
+}
+
+main{
+    display: flex;
 }
