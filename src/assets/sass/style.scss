@@ -1,0 +1,12 @@
+@import 'mixin';
+@import 'login';
+@import 'register';
+@import 'home';
+@import 'subject';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}

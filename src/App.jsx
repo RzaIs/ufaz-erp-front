@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import AdminPanel from "./admin/AdminPanel";
 import Subject from "./admin/pages/Subject";
 import Error from "./components/Error";
+import Group from "./admin/pages/Group";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/admin' element={<AdminPanel />} />
           <Route path='/admin/subjects' element={<Subject />} />
+          <Route path='/admin/groups' element={<Group />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </Router>
