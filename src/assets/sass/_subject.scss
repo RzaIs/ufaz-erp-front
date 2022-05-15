@@ -1,0 +1,38 @@
+.subject-page{
+    background: linear-gradient(
+        rgba(157, 151, 151, 0.7), 
+        rgba(157, 151, 151, 0.7)
+      ), url('../img/pexels-olia-danilevich-5088017.jpg');
+    background-size: cover;
+    height: 100vh;
+    .add-subject-form{
+        padding-top: 50px;
+        padding-left: 30px;
+        input{
+            font-size: 16px;
+            margin-right: 40px;
+            width: 70px;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 7px;
+            outline: none;
+            border: 2px solid rgb(145, 96, 49);
+            color: rgb(145, 96, 49);
+            &::placeholder{
+                color: rgb(145, 96, 49);
+            }
+        }
+        .subject-name{
+            width: 250px;
+        }
+        .add-subject-btn{
+            width: 140px;
+            padding: 8px 10px;
+            cursor: pointer;
+            text-transform: capitalize;
+            color: #fff;
+            background: rgb(145, 96, 49);
+            transition: .5s;
+        }
+    }
+}
