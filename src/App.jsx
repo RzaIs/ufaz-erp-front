@@ -1,10 +1,13 @@
 import Login from "./components/auth/Login";
+import ContextController from "./context/ContextController";
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <ContextController>
+      <div className="App">
+        <Login />
+      </div>
+    </ContextController>
   );
 }
 
