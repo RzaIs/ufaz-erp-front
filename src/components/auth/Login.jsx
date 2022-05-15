@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
+import { useUserContext } from '../../context/UserContext'
 import LoginForm from './LoginForm'
 import LoginAPI from '../../api/LoginAPI'
 
 
 function Login() {
-  const [user, setUser] = useState({
-    logged: false,
-    email: "",
-    token: "",
-  })
+  
+  const { user, setUser, clearUser } = useUserContext()
 
   const login = async (details) => {
     
@@ -26,11 +24,7 @@ function Login() {
     const confirmed = window.confirm("Are you sure you want to logout?")
     if (!confirmed) return
 
-    setUser({
-      logged: false,
-      email: "",
-      token: "",
-    })
+    clearUser()
   }
 
   return (
