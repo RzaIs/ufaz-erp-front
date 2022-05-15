@@ -1,0 +1,71 @@
+.logout-btn{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    width: 100%;
+    background: #335F9C;
+    height: 80px;
+    button{
+        padding: 8px 20px;
+        cursor: pointer;
+        font-size: 18px;
+        border: 2px solid #fff;
+        background: #335F9C;
+        color: #fff;
+        border-radius: 10px;
+        transition: .5s;
+        &:hover{
+            background: #fff;
+            color: #335F9C;
+        }
+    }
+}
+
+.image-part{
+    width: 100%;
+    height: 250px;
+    opacity: .7;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+section{
+    margin-top: 50px;
+    .row{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 100px;
+        button{
+            width: 300px;
+            padding: 30px 0;
+            cursor: pointer;
+            font-size: 30px;
+            border-radius: 10px;
+            background: #fff;
+            i{
+                font-size: 35px;
+            }
+        }
+        .curriculum-btn{
+            @include section-btns(#D65745);
+        }
+        .timetable-btn{
+            @include section-btns(#8448A8)
+        }
+        .homework-btn{
+            @include section-btns(#4A9E86);
+        }
+        .attendance-btn{
+            @include section-btns(#B96F33);
+        }
+        .announcement-btn{
+            @include section-btns(#437EB4);
+        }
+        .grades-btn{
+            @include section-btns(#E7A03C);
+        }
+    }
+}
