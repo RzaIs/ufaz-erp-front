@@ -13,7 +13,7 @@ function AdminPanel() {
       <Link className='link-to' to={'/admin/lessons'}>Lessons</Link><br /><br />
       <Link className='link-to' to={'/admin/groups'}>Groups</Link><br /><br />
       <Link className='link-to' to={'/admin/teachers'}>Teachers</Link><br /><br />
-      <Link className='link-to' to={'/admin/announce'}>Announces</Link><br /><br />
+      <Link className='link-to' to={'/admin/announces'}>Announces</Link><br /><br />
     </div> : <Navigate replace to='/login' /> 
   )
 }
