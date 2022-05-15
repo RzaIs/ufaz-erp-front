@@ -1,21 +1,25 @@
 import React, { useState } from 'react'
 import { useUserContext } from '../../context/UserContext'
+import { Navigate } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import LoginAPI from '../../api/LoginAPI'
 
 
 function Login() {
-  
+
   const { user, setUser, clearUser } = useUserContext()
 
+  const [redirect, setRedirect] = useState(false)
+
   const login = async (details) => {
-    
+
     const response = await LoginAPI(details)
 
     if (response === null) {
       return false
     } else {
       setUser({ logged: true, email: details.email, token: response.jwt })
+      setRedirect(true)
       return true
     }
   }
@@ -27,7 +31,7 @@ function Login() {
     clearUser()
   }
 
-  return (
+  return (redirect ? <Navigate replace to='/' /> :
     <div className="login-body">
       {user.logged ? (
         <div className='container'>

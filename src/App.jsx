@@ -1,6 +1,7 @@
 import ContextController from "./context/ContextController";
 import Login from "./components/auth/Login";
 import Home from "./components/Home";
+
 import Error from "./components/Error";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
