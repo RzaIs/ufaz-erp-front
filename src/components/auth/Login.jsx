@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import LoginForm from './LoginForm'
+import LoginAPI from '../../api/LoginAPI'
 
 
 function Login() {
@@ -10,9 +11,8 @@ function Login() {
   })
 
   const login = async (details) => {
-    const response = {
-      jwt: "12345"
-    }
+    
+    const response = await LoginAPI(details)
 
     if (response === null) {
       return false
