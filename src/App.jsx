@@ -8,6 +8,7 @@ import Group from "./admin/pages/Group";
 import Announce from "./admin/pages/Announce";
 import Lesson from "./admin/pages/Lesson";
 import Teacher from "./admin/pages/Teacher";
+import Announcement from "./components/pages/Announcement";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/announcements' element={<Announcement />} />
           <Route path='/admin' element={<AdminPanel />} />
           <Route path='/admin/subjects' element={<Subject />} />
           <Route path='/admin/groups' element={<Group />} />
