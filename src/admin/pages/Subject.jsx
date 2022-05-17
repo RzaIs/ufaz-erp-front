@@ -47,7 +47,7 @@ function Subject() {
       id: e.target.id.value,
       name: e.target.name.value,
       credits: e.target.credits.value,
-      totalNumberOfLessons: e.target.nbOfLessons.value
+      nbOfLessons: e.target.nbOfLessons.value
     }, user.token).then(getSubjects)
   }
 
@@ -72,7 +72,6 @@ function Subject() {
         <tbody>
           {subjects.map((subject) =>
             <tr key={subject.id}>
-              <td>{subject.id}, </td>
               <td>{subject.name}, </td>
               <td>{subject.credits}, </td>
               <td>{subject.totalNumberOfLessons}, </td>
