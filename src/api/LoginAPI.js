@@ -14,7 +14,7 @@ const LoginAPI = async (details) => {
   }).catch((error) => {
     console.log(error)
   })
-
+  
   return result
 }
 
