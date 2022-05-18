@@ -3,9 +3,9 @@ import { Navigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import { AddSubjectAPI, GetSubjectsAPI, DeleteSubjectAPI, UpdateSubjectAPI } from '../../api/SubjectAPI'
 import { useUserContext } from '../../context/UserContext'
+import { Link } from 'react-router-dom'
 
 function Subject() {
-
   const { user } = useUserContext()
 
   const [subjects, setSubjects] = useState([])
@@ -54,45 +54,87 @@ function Subject() {
   useEffect(getSubjects, [user.token])
 
   return (user.logged ?
-    <div>
-      <form onSubmit={addSubject}>
-        <input type='text' name='name' value={subjectName} onChange={(e) => setSubjectName(e.target.value)} />
-        <input type='number' name='credits' value={subjectCredits} onChange={(e) => setSubjectCredits(e.target.value)} />
-        <input type='number' name='nbOfLessons' value={subjectNbOfLessons} onChange={(e) => setSubjectNbOfLessons(e.target.value)} />
-        <input type='submit' value='add subject' />
-      </form>
-      <table>
-        <thead>
-          <tr>
-            <th>name, </th>
-            <th>credits, </th>
-            <th>number of lessons, </th>
-          </tr>
-        </thead>
-        <tbody>
-          {subjects.map((subject) =>
-            <tr key={subject.id}>
-              <td>{subject.name}, </td>
-              <td>{subject.credits}, </td>
-              <td>{subject.totalNumberOfLessons}, </td>
-              <td>
-                <button onClick={() => deleteSubject(subject.id)} >delete</button>
-              </td>
-              <td>
-                <Popup trigger={<button>edit</button>} position='right center' >
-                  <form onSubmit={updateSubject}>
-                    <input type="hidden" name="id" defaultValue={subject.id} />
-                    <input type='text' name='name' defaultValue={subject.name} />
-                    <input type='number' name='credits' defaultValue={subject.credits} />
-                    <input type='number' name='nbOfLessons' defaultValue={subject.totalNumberOfLessons} />
-                    <input type='submit' value='update subject' />
-                  </form>
-                </Popup>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    <div className='admin-subject'>
+      <nav>
+        <div className="title">
+          <h1>
+            <Link className='link-to' to={'/admin'}>EduPage</Link>
+          </h1>
+        </div>
+        <div className="links-to-pages">
+          <ul>
+            <li>
+              <Link className='active' to={'/admin/subjects'}>Subjects</Link>
+            </li>
+            <li>
+              <Link className='link-to' to={'/admin/lessons'}>Lessons</Link>
+            </li>
+            <li>
+              <Link className='link-to' to={'/admin/groups'}>Groups</Link>
+            </li>
+            <li>
+              <Link className='link-to' to={'/admin/teachers'}>Teachers</Link>
+            </li>
+            <li>
+              <Link className='link-to' to={'/admin/lessons'}>Announces</Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div className="content">
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th className='th-top-first'>Name</th>
+                <th>Credits</th>
+                <th>Number of Lessons</th>
+                <th></th>
+                <th className='th-top-last'></th>
+              </tr>
+            </thead>
+            <tbody>
+              {subjects.map((subject) =>
+                <tr key={subject.id} className='tr-tbody'>
+                  <td>{subject.name}</td>
+                  <td className='td-center'>{subject.credits}</td>
+                  <td className='td-center'>{subject.totalNumberOfLessons}</td>
+                  <td>
+                    <button onClick={() => deleteSubject(subject.id)} className="delete-btn" title='Delete' ><i className="fa-solid fa-trash-can"></i></button>
+                  </td>
+                  <td>
+                    <Popup className='edit-popup' trigger={<button className='edit-btn' title='Edit'><i className="fa-solid fa-pen-to-square"></i></button>} position='right center'>
+                      <form onSubmit={updateSubject}>
+                        <input type="hidden" name="id" defaultValue={subject.id} />
+                        <input type='text' name='name' defaultValue={subject.name} />
+                        <br />
+                        <input type='number' name='credits' defaultValue={subject.credits} />
+                        <br />
+                        <input type='number' name='nbOfLessons' defaultValue={subject.totalNumberOfLessons} />
+                        <br />
+                        <input type='submit' value='update subject' className='btn' />
+                      </form>
+                    </Popup>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="form-container">
+          <form onSubmit={addSubject}>
+            <label htmlFor="name">Subject Name </label> <br />
+            <input type='text' name='name' value={subjectName} onChange={(e) => setSubjectName(e.target.value)} className="inp-subject-name" /> <br />
+            <label htmlFor="credits">Credits </label> <br />
+            <input type='number' name='credits' value={subjectCredits} onChange={(e) => setSubjectCredits(e.target.value)} className='inp-number' /> <br />
+            <label htmlFor="nbOfLessons">Number of Lessons </label> <br />
+            <input type='number' name='nbOfLessons' value={subjectNbOfLessons} onChange={(e) => setSubjectNbOfLessons(e.target.value)} className='inp-number' /> <br />
+            <input type='submit' value='add subject' className='add-btn' />
+          </form>
+        </div>
+      </div>
     </div> : <Navigate replace to='/login' />
   )
 }
