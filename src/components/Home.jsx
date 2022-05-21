@@ -34,7 +34,7 @@ function Home() {
             <Link to={'/attendance'}><button className="attendance-btn"><i className="fa-solid fa-clipboard-user"></i> Attendance</button></Link>
           </div>
           <div className="row">
-            <Link to={'/announcements'}><button className="announcement-btn"><i className="fa-solid fa-envelope"></i> Announcement</button></Link>
+            <Link to={'/announcement'}><button className="announcement-btn"><i className="fa-solid fa-envelope"></i> Announcement</button></Link>
             <Link to={'/grades'}><button className="grades-btn"><i className="fa-solid fa-a"></i> Grades</button></Link>
           </div>
         </section>
