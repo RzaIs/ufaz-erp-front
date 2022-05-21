@@ -1,0 +1,192 @@
+.admin-group{
+    height: 100vh;
+    background: #d8d9eb;
+    .groups-content{
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        .add-group-form{
+            //background: red;
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            //align-items: center;
+            .form{
+                width: 400px;
+                background: #fff;
+                padding: 30px 60px;
+                border-radius: 10px;
+                height: 127.9px;
+                margin-top: 10%;
+                h3{
+                    font-size: 24px;
+                    text-transform: capitalize;
+                    margin-bottom: 5%;
+                    text-align: center;
+                }
+                form{
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    input{
+                        width: 60%;
+                        padding: 6px 12px;
+                        outline: none;
+                        border: 2px solid rgb(134, 134, 134);
+                        border-radius: 5px;
+                    }
+                    .btn-add{
+                        font-size: 16px;
+                        width: unset;
+                        text-transform: capitalize;
+                        font-weight: bold;
+                        border: none;
+                        cursor: pointer;
+                        background: rgb(2, 184, 2);
+                        color: #fff;
+                        transition: .3s;
+                        &:hover{
+                            background: rgb(1, 125, 1);
+                        }
+                    }
+                }
+            }
+        }
+        .groups-table{
+            //background: green;
+            width: 40%;
+            height: 600px;
+            table{
+                display: block;
+                background: #fff;
+                margin: 50px auto;
+                width: 80%;
+                border-collapse: collapse;
+                border-radius: 10px;
+                height: 500px;
+                overflow-y: scroll;
+                th {
+                    position: -webkit-sticky; // this is for all Safari (Desktop & iOS), not for Chrome
+                    position: sticky;
+                    top: 0;
+                    z-index: 1; // any positive value, layer order is global
+                    // any bg-color to overlap
+                }
+                th,td{
+                    padding: 8px;
+                    text-transform: capitalize;
+                    text-align: center;
+                }
+                td{
+                    //width: 60px;
+                    width: 65%;
+                }
+                .th-btn{
+                    //width: 20px;
+                    width: 25%;
+                }
+                .td-btn{
+                    width: 30%;
+                }
+                .tr-tbody:last-child{
+                    td:first-child{
+                        border-bottom-left-radius: 10px;
+                    }
+                    td:last-child{
+                        border-bottom-right-radius: 10px;
+                    }
+                }
+                th{
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    background-color: #5173ed;
+                    color: #fff;
+                }
+                .tr-tbody:nth-child(even){
+                    background: #f2f2f2;
+                }
+                .tr-tbody:nth-child(odd){
+                    background: #fff;
+                }
+
+                .tr-tbody{
+                    &:hover{
+                        background: #ddd;
+                    }
+                }
+                button{
+                    font-size: 18px;
+                    color: #fff;
+                    padding: 5px 10px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: .3s;
+                }
+                .delete-btn{
+                    background: red;
+                    &:hover{
+                        background: rgb(170, 2, 2);
+                    }
+                }
+                .edit-btn{
+                    background: orange;
+                    &:hover{
+                        background: rgb(180, 118, 3);
+                    }
+                }
+            }
+            .edit-popup{
+                border: 2px solid red;
+            }
+        }
+    }
+}
+
+.popup-content {
+    text-align: center;
+    margin: auto;
+    background: rgb(255, 255, 255);
+    width: 50%;
+    padding: 5px;
+    border: 2px solid #5173ed;
+    border-radius: 10px;
+    input{
+        width: 200px;
+        margin: 5px 0;
+        padding: 5px;
+    }
+    .btn{
+        width: unset;
+        padding: 8px 20px;
+        color: red;
+        text-transform: capitalize;
+        cursor: pointer;
+        border: none;
+        background: #5173ed;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bolder;
+        border-radius: 10px;
+        transition: .3s;
+        &:hover{
+            background: #0f33b2;
+        }
+    }
+    
+  }
+  .popup-arrow {
+    color: #5173ed;
+  }
+  [role='tooltip'].popup-content {
+    width: 300px;
+    
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+  }
+  
+  .popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  [data-popup='tooltip'].popup-overlay {
+    background: transparent;
+  }
