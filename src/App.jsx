@@ -8,6 +8,7 @@ import Group from "./admin/pages/Group";
 import Announce from "./admin/pages/Announce";
 import Lesson from "./admin/pages/Lesson";
 import Teacher from "./admin/pages/Teacher";
+import Student from "./admin/pages/Student";
 import Announcement from "./components/pages/Announcement";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/admin/announces' element={<Announce />} />
           <Route path='/admin/lessons' element={<Lesson />} />
           <Route path='/admin/teachers' element={<Teacher />} />
+          <Route path='/admin/students' element={<Student />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </Router>
