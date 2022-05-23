@@ -65,7 +65,7 @@ export const UpdateTeacherAPI = async (details, token) => {
 
   let result = null
 
-  await Axios.put(TEACHER_URL, + '/' + details.id, {
+  await Axios.put(TEACHER_URL + '/' + details.id, {
     email: details.email,
     password: details.password,
     firstName: details.firstName,

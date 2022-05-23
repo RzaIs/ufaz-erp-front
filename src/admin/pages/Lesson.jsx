@@ -42,10 +42,15 @@ function Lesson() {
       period: period,
       teacherId: teacherID,
       groupId: groupID
-    }, user.token).then((response) => {
-      if (response !== null) {
-        getLessons()
-      }
+    }, user.token).then((r) => {
+      getLessons()
+      setSubjectID(0)
+      setRoom(0)
+      setWeek(0)
+      setDay(1)
+      setPeriod(0)
+      setTeacherID(0)
+      setGroupID(0)
     })
   }
 

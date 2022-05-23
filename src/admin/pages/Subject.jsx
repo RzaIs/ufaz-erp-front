@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import { AddSubjectAPI, GetSubjectsAPI, DeleteSubjectAPI, UpdateSubjectAPI } from '../../api/SubjectAPI'
 import { useUserContext } from '../../context/UserContext'
+import Navbar from '../Navbar'
 import { Link } from 'react-router-dom'
 
 function Subject() {
@@ -28,7 +29,12 @@ function Subject() {
       name: subjectName,
       credits: subjectCredits,
       nbOfLessons: subjectNbOfLessons
-    }, user.token).then(getSubjects)
+    }, user.token).then((r) => {
+      getSubjects()
+      setSubjectName("")
+      setSubjectCredits(0)
+      setSubjectNbOfLessons(0)
+    })
   }
 
   const deleteSubject = (id) => {
@@ -55,7 +61,7 @@ function Subject() {
 
   return (user.logged ?
     <div className='admin-subject'>
-      <nav>
+      {/* <nav>
         <div className="title">
           <h1>
             <Link className='link-to' to={'/admin'}>EduPage</Link>
@@ -80,8 +86,8 @@ function Subject() {
             </li>
           </ul>
         </div>
-      </nav>
-
+      </nav> */}
+      <Navbar />
       <div className="content">
         <div className="table-container">
           <table>

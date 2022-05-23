@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import Popup from 'reactjs-popup'
 import { Navigate } from 'react-router-dom'
 import { useUserContext } from '../../context/UserContext'
-import { AddTeacherAPI, DeleteTeacherAPI, GetTeachersAPI } from '../../api/TeacherAPI'
-import Navbar from './Navbar';
+import { AddTeacherAPI, DeleteTeacherAPI, GetTeachersAPI, UpdateTeacherAPI } from '../../api/TeacherAPI'
+import Navbar from '../Navbar';
 
 
 function Teacher() {
@@ -28,23 +29,25 @@ function Teacher() {
     e.preventDefault()
 
     if (password !== confPswd) {
+      window.alert("Passwords does not match!")
       setPassword("")
       setConfPswd("")
-    } else {
-      AddTeacherAPI({
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName
-      }, user.token).then((response) => {
-        getTeachers()
-        setEmail("")
-        setFirstName("")
-        setLastName("")
-        setPassword("")
-        setConfPswd("")
-      })
+      return
     }
+
+    AddTeacherAPI({
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName
+    }, user.token).then((r) => {
+      getTeachers()
+      setEmail("")
+      setFirstName("")
+      setLastName("")
+      setPassword("")
+      setConfPswd("")
+    })
   }
 
   const deleteTeacher = (id) => {
@@ -54,11 +57,24 @@ function Teacher() {
     DeleteTeacherAPI(id, user.token).then(getTeachers)
   }
 
-  const updateTeacher = (id) => {
+  const updateTeacher = (e) => {
+    e.preventDefault()
+
+    if (e.target.password.value !== e.target.confPswd.value) {
+      window.alert("Passwords does not match!")
+      return
+    }
+
     let confirmed = window.confirm("Are you sure you want to make changes for this teacher?")
     if (!confirmed) return
 
-    // DeleteTeacherAPI(id, user.token).then(getTeachers)
+    UpdateTeacherAPI({
+      id: e.target.id.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value
+    }, user.token).then(getTeachers)
   }
 
   useEffect(getTeachers, [user.token])
@@ -92,6 +108,7 @@ function Teacher() {
                   <th>first name</th>
                   <th>last name</th>
                   <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -102,6 +119,24 @@ function Teacher() {
                     <td>{teacher.lastName}</td>
                     <td className='td-btn'>
                       <button onClick={() => deleteTeacher(teacher.id)} title="Delete"><i className="fa-solid fa-trash-can"></i></button>
+                    </td>
+                    <td>
+                    <Popup className='edit-popup' trigger={<button className='edit-btn' title='Edit'><i className="fa-solid fa-pen-to-square"></i></button>} position='right center'>
+                      <form onSubmit={updateTeacher}>
+                        <input type="hidden" name="id" defaultValue={teacher.id} />
+                        <input type='email' name='email' defaultValue={teacher.email} />
+                        <br />
+                        <input type='text' name='firstName' defaultValue={teacher.firstName} />
+                        <br />
+                        <input type='text' name='lastName' defaultValue={teacher.lastName} />
+                        <br />
+                        <input type='password' name='password' />
+                        <br />
+                        <input type='password' name='confPswd' />
+                        <br />
+                        <input type='submit' value='update subject' className='btn' />
+                      </form>
+                    </Popup>
                     </td>
                   </tr>
                 )}

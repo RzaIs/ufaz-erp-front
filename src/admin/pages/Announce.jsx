@@ -30,7 +30,7 @@ function Announce() {
     AddAnnounceAPI({
       title: title,
       text: text
-    }, user.token).then((response) => {
+    }, user.token).then((r) => {
       getAnnounces()
       setTitle("")
       setText("")
@@ -54,8 +54,6 @@ function Announce() {
       title: e.target.title.value,
       text: e.target.text.value
     }, user.token).then(getAnnounces)
-
-    e.target.title = ""
   }
 
   useEffect(getAnnounces, [user.token])

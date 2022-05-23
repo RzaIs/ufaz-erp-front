@@ -73,8 +73,7 @@ export const UpdateStudentAPI = async (details, token) => {
     password: details.password,
     firstName: details.firstName,
     lastName: details.lastName,
-    groupId: details.groupId,
-    admissionYear: details.admissionYear
+    groupId: details.groupId
   }, {
     headers: {
       'Authorization': 'Bearer ' + token

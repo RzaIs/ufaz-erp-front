@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Popup from 'reactjs-popup'
 import { GetGroupsAPI } from '../../api/GroupAPI'
-import { AddStudentAPI, DeleteStudentAPI, GetStudentsAPI } from '../../api/StudentAPI'
+import { AddStudentAPI, DeleteStudentAPI, GetStudentsAPI, UpdateStudentAPI } from '../../api/StudentAPI'
 import { useUserContext } from '../../context/UserContext'
 
 function Student() {
@@ -44,6 +44,12 @@ function Student() {
   const addStudent = (e) => {
     e.preventDefault()
     
+    if (password !== confPswd) {
+      window.alert("Passwords does not match!")
+      setPassword("")
+      setConfPswd("")
+      return
+    }
 
     AddStudentAPI({
       email: email,
@@ -54,7 +60,12 @@ function Student() {
       admissionYear: admYear
     }, user.token).then((response) => {
       getStudents()
-      // clear fields
+      setEmail("")
+      setPassword("")
+      setFirstName("")
+      setLastName("")
+      setGroupId(0)
+      setAdmYear(0)
     })
   }
 
@@ -63,6 +74,27 @@ function Student() {
     if (!confirmed) return
 
     DeleteStudentAPI(id, user.token).then(getStudents)
+  }
+
+  const updateStudent = (e) => {
+    e.preventDefault()
+
+    if (e.target.password.value !== e.target.confPswd.value) {
+      window.alert("Passwords does not match!")
+      return
+    }
+
+    let confirmed = window.confirm("Are you sure you want to make changes for this student?")
+    if (!confirmed) return
+
+    UpdateStudentAPI({
+      id: e.target.id.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      groupId: e.target.groupId.value
+    }, user.token).then(getStudents)
   }
 
   useEffect(() => {
@@ -109,8 +141,19 @@ function Student() {
                     </button>
                 </td>
                 <td>
-                  <Popup trigger={<button className='edit-btn' title='Rename'><i className="fa-solid fa-pen-to-square"></i></button>} position='right center'>
-                    
+                  <Popup trigger={<button className='edit-btn' title='Rename'><i className="fa-solid fa-pen-to-square"></i></button>} position='bottom center'>
+                    <form onSubmit={updateStudent} >
+                      <input type="hidden" name="id" defaultValue={student.id} />
+                      <input type="email" name="email" defaultValue={student.email} />
+                      <input type="text" name="firstName" defaultValue={student.firstName} />
+                      <input type="text" name="lastName" defaultValue={student.lastName} />
+                      <select name='groupId' defaultValue={student.group.id} >
+                        {groups.map(grp => grp)}
+                      </select>
+                      <input type="password" name="password" />
+                      <input type="password" name="confPswd" />
+                      <input type="submit" value="change" />
+                    </form>
                   </Popup>
                 </td>
               </tr>

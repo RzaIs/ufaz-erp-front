@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useUserContext } from '../../context/UserContext'
 import { AddGroupAPI, DeleteGroupAPI, GetGroupsAPI, UpdateGroupAPI } from '../../api/GroupAPI'
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 import Popup from 'reactjs-popup'
 
 function Group() {
@@ -23,7 +23,7 @@ function Group() {
   const addGroup = (e) => {
     e.preventDefault()
 
-    AddGroupAPI({ name: name }, user.token).then((response) => {
+    AddGroupAPI({ name: name }, user.token).then((r) => {
       getGroups()
       setName("")
     })
