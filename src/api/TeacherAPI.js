@@ -61,12 +61,16 @@ export const DeleteTeacherAPI = async (id, token) => {
   return result
 }
 
-/*
-export const DeleteGroupAPI = async (id, token) => {
+export const UpdateTeacherAPI = async (details, token) => {
 
   let result = null
 
-  await Axios.delete(GROUP_URL + '/' + id, {
+  await Axios.put(TEACHER_URL, + '/' + details.id, {
+    email: details.email,
+    password: details.password,
+    firstName: details.firstName,
+    lastName: details.lastName
+  }, {
     headers: {
       'Authorization': 'Bearer ' + token
     }
@@ -78,4 +82,3 @@ export const DeleteGroupAPI = async (id, token) => {
 
   return result
 }
-*/
