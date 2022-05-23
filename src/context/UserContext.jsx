@@ -4,8 +4,11 @@ const userContext = createContext()
 
 const defaultUserSate = {
   logged: false,
+  id: 0,
   email: "",
-  token: "",
+  firstName: "",
+  lastName: "",
+  token: ""
 }
 
 function UserContextProvider({ children }) {

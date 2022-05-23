@@ -18,7 +18,14 @@ function Login() {
     if (response === null) {
       return false
     } else {
-      setUser({ logged: true, email: details.email, token: response.jwt })
+      setUser({
+        logged: true,
+        id: response.user.id,
+        email: response.user.email,
+        firstName: response.user.firstName,
+        lastName: response.user.lastName,
+        token: response.jwt
+      })
       setRedirect(true)
       return true
     }
