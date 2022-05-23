@@ -4,7 +4,7 @@ import { useUserContext } from '../../context/UserContext'
 import { GetTeachersAPI } from '../../api/TeacherAPI'
 import { GetGroupsAPI } from '../../api/GroupAPI'
 import { GetSubjectsAPI } from '../../api/SubjectAPI'
-import { AddLessonAPI } from '../../api/LessonAPI'
+import { AddLessonAPI, GetLessonsAPI } from '../../api/LessonAPI'
 
 function Lesson() {
 
@@ -19,10 +19,18 @@ function Lesson() {
   const [teacherID, setTeacherID] = useState(0)
   const [groupID, setGroupID] = useState(0)
 
+  const [lessons, setLessons] = useState([])
   const [teachers, setTeachers] = useState([])
   const [groups, setGroups] = useState([])
   const [subjects, setSubjects] = useState([])
 
+  const getLessons = () => {
+    GetLessonsAPI(user.token).then((response) => {
+      if (response !== null) {
+        setLessons(response.lessons)
+      }
+    })
+  }
 
   const addLesson = (e) => {
     e.preventDefault()
@@ -34,7 +42,11 @@ function Lesson() {
       period: period,
       teacherId: teacherID,
       groupId: groupID
-    }, user.token)
+    }, user.token).then((response) => {
+      if (response !== null) {
+        getLessons()
+      }
+    })
   }
 
   const getTeachers = () => {
@@ -86,6 +98,7 @@ function Lesson() {
   }
 
   useEffect(() => {
+    getLessons()
     getTeachers()
     getGroups()
     getSubjects()
@@ -100,8 +113,21 @@ function Lesson() {
       <form onSubmit={addLesson}>
         <input type="number" name="room" value={room} onChange={(e) => setRoom(e.target.value)} />
         <input type="number" name="week" value={week} onChange={(e) => setWeek(e.target.value)} />
-        <input type="number" name="day" value={day} onChange={(e) => setDay(e.target.value)} />
+        <select name="day" value={day} onChange={(e) => setDay(e.target.value)} >
+          <option value={1}>monday</option>
+          <option value={2}>tuesday</option>
+          <option value={3}>wednesday</option>
+          <option value={4}>thursday</option>
+          <option value={5}>friday</option>
+        </select>
         <input type="number" name="period" value={period} onChange={(e) => setPeriod(e.target.value)} />
+        <select name="period" value={period} onChange={(e) => setPeriod(e.target.value)} >
+          <option value={0}>08:30 - 10:00</option>
+          <option value={1}>10:15 - 11:45</option>
+          <option value={2}>12:45 - 14:15</option>
+          <option value={3}>14:30 - 16:00</option>
+          <option value={4}>16:15 - 17:45</option>
+        </select>
         <select name="subjectID" value={subjectID} onChange={(e) => setSubjectID(e.target.value)}>
           {subjects.map(sbj => sbj)}
         </select>
@@ -113,6 +139,27 @@ function Lesson() {
         </select>
         <input type="submit" value="add lesson" />
       </form>
+      <table>
+        <thead>
+
+        </thead>
+        <tbody>
+          {lessons.map((lesson) =>
+            <tr key={lesson.lessonId} >
+              <td>{lesson.subject.name}</td>
+              <td>{lesson.group.name}</td>
+              <td>{lesson.teacher.firstName} {lesson.teacher.lastName}</td>
+              <td>{lesson.room}</td>
+              <td>{lesson.week}</td>
+              <td>{lesson.day}</td>
+              <td>{lesson.period}</td>
+              <td>
+                {/* <button onClick={} className="delete-btn" title="Delete"><i className="fa-solid fa-trash-can" /></button> */}
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div> : <Navigate replace to='/login' /> 
   )
 }
