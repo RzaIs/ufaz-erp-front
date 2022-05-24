@@ -10,7 +10,9 @@ import Lesson from "./admin/pages/Lesson";
 import Teacher from "./admin/pages/Teacher";
 import Student from "./admin/pages/Student";
 import Announcement from "./components/pages/Announcement";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Timetable from "./components/pages/Timetable";
+import Attendance from "./components/pages/Attendance";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/timetable' element={<Timetable />} />
+          <Route path='/attendance' element={<Attendance />} />
           <Route path='/announcements' element={<Announcement />} />
           <Route path='/admin' element={<AdminPanel />} />
           <Route path='/admin/subjects' element={<Subject />} />

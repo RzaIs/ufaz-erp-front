@@ -46,18 +46,15 @@ function Announcement() {
       title: e.target.title.value,
       text: e.target.text.value
     }, user.token).then(getAnnounces)
-
-    e.target.title = ""
   }
 
-  useEffect(getAnnounces)
+  useEffect(getAnnounces, [user.token])
 
   return (
     <div>
       {announces.map((announce) => <AnnounceView
         key={announce.id}
         details={announce}
-        userEmail={user.email}
         updateAnnounce={updateAnnounce}
       />)}
       <h3>Add Announcement</h3>
@@ -72,11 +69,16 @@ function Announcement() {
 
 function AnnounceView({ details, userEmail, updateAnnounce }) {
 
+  const { user } = useUserContext()
+
   const [editMode, setEditMode] = useState(false)
 
   return (
     <>{editMode ?
-      <form onSubmit={updateAnnounce} >
+      <form onSubmit={(e) => {
+        setEditMode(false)
+        updateAnnounce(e)
+      }} >
         <input type="hidden" name="id" value={details.id} />
         <input type="text" name="title" defaultValue={details.title} />
         <input type="text" name="text" defaultValue={details.text} />
@@ -90,8 +92,9 @@ function AnnounceView({ details, userEmail, updateAnnounce }) {
         <div>{details.text}</div>
         <div>{details.publishDate}</div>
       </div>}
-      {details.author.email === userEmail ? <button onClick={(e) => setEditMode(!editMode)}>edit</button> : <></>}
-      <hr />
+      {details.author.id === user.id ?
+        <button onClick={(e) => setEditMode(!editMode)}>edit</button> : <></>
+      } <hr />
     </>
   )
 }

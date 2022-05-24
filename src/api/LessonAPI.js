@@ -1,4 +1,6 @@
 import Axios from "./Axios"
+import { TEACHER_URL } from "./TeacherAPI"
+import { STUDENT_URL } from "./StudentAPI"
 
 const LESSON_URL = 'api/lessons'
 
@@ -26,15 +28,12 @@ export const GetLessonsOfStudentAPI = async (studentID, token) => {
 
   let result = null
 
-  await Axios.get('api/students/'+ studentID +'/lessons', {
+  await Axios.get(STUDENT_URL + '/' + studentID + '/lessons', {
     headers: {
       'Authorization': 'Bearer ' + token
     }
   }).then((response) => {
     result = response.data
-    result.lessons.sort((a, b) => {
-      return a.id - b.id
-    })
   }).catch((error) => {
     console.log(error)
   })
@@ -46,7 +45,7 @@ export const GetLessonsOfTeacherAPI = async (teacherID, token) => {
 
   let result = null
 
-  await Axios.get('api/teachers/'+ teacherID +'/lessons', {
+  await Axios.get(TEACHER_URL + '/' + teacherID + '/lessons', {
     headers: {
       'Authorization': 'Bearer ' + token
     }

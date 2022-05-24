@@ -1,6 +1,6 @@
 import Axios from "./Axios"
 
-const TEACHER_URL = 'api/teachers'
+export const TEACHER_URL = 'api/teachers'
 
 export const GetTeachersAPI = async (token) => {
 

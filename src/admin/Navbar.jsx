@@ -26,6 +26,9 @@ const Navbar = () => {
             <li>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/announces'}>Announces</NavLink>
             </li>
+            <li>
+              <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/students'}>Students</NavLink>
+            </li>
           </ul>
         </div>
       </nav>
