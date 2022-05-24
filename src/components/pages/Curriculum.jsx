@@ -7,31 +7,57 @@ function Curriculum() {
 
   const { user } = useUserContext()
 
-  const [subjects, setSubjects] = useState(new Set())
+  // const [subjectsSet, setSubjectsSet] = useState([])
+  const [lessons, setLessons] = useState([])
+  const [subjects, setSubjects] = useState([])
 
-  const getSubjects = () => {
+  const getLessons = () => {
     GetLessonsOfStudentAPI(user.id, user.token).then((response) => {
       if (response !== null) {
-        let _subjects = new Set()
-        response.lessons.forEach((lesson) => {
-          GetSubjectAPI(lesson.subject.id, user.token).then((r) => {
-            if (r !== null) {
-              _subjects.add(r.subject)
-            }
-          })
-        })
-        setSubjects(_subjects)
-        console.log(subjects)
+        setLessons(response.lessons)
       }
+    })
+  }
+
+  const getSubjects = () => {
+    let newset = new Set()
+    lessons.forEach((lesson) => {
+      GetSubjectAPI(lesson.subject.id, user.token).then((response) => {
+        newset.add(response.subject)
+        setSubjects([...newset])
+      })
     })
   }
 
   useEffect(() => {
     getSubjects()
+  }, [lessons])
+
+  useEffect(() => {
+    getLessons()
   }, [user.token])
 
   return (
-    <div>Curriculum</div>
+    <div>
+      <table>
+        <thead>
+        <tr>
+          <th>name</th>
+          <th>credits</th>
+          <th>number of lessons</th>
+        </tr>
+        </thead>
+        <tbody>
+            {subjects.map((subject) => 
+              <tr key={subject.id} >
+                <td>{subject.name}</td>
+                <td>{subject.credits}</td>
+                <td>{subject.totalNumberOfLessons}</td>
+              </tr>
+            )}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
