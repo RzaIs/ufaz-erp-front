@@ -52,4 +52,21 @@ export const GetAbsenceOfStudentAPI = async (token) => {
   return result
 }
 
+export const GetAbsenceOfLessonAPI = async (id, token) => {
+
+  let result = null
+
+  await Axios.get(ABSENCE_URL + '/lesson/' + id, {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+    result = response.data
+  }).catch((error) => {
+    console.log(error)
+  })
+
+  return result
+}
+
 export default GetAbsenceAPI;

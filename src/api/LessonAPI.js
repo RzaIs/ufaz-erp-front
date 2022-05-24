@@ -2,7 +2,7 @@ import Axios from "./Axios"
 import { TEACHER_URL } from "./TeacherAPI"
 import { STUDENT_URL } from "./StudentAPI"
 
-const LESSON_URL = 'api/lessons'
+export const LESSON_URL = 'api/lessons'
 
 export const GetLessonsAPI = async (token) => {
 

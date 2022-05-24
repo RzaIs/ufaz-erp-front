@@ -1,4 +1,5 @@
 import Axios from "./Axios"
+import { LESSON_URL } from "./LessonAPI"
 
 export const STUDENT_URL = 'api/students'
 
@@ -7,6 +8,26 @@ export const GetStudentsAPI = async (token) => {
   let result = null
 
   await Axios.get(STUDENT_URL, {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+    result = response.data
+    result.students.sort((a, b) => {
+      return a.id - b.id
+    })
+  }).catch((error) => {
+    console.log(error)
+  })
+
+  return result
+}
+
+export const GetStudentOfLesson = async (id, token) => {
+
+  let result = null
+
+  await Axios.get(LESSON_URL + '/' + id + '/students', {
     headers: {
       'Authorization': 'Bearer ' + token
     }

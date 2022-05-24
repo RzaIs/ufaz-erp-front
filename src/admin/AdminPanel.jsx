@@ -15,6 +15,7 @@ function AdminPanel() {
       <Link className='link-to' to={'/admin/teachers'}>Teachers</Link><br /><br />
       <Link className='link-to' to={'/admin/students'}>Students</Link><br /><br />
       <Link className='link-to' to={'/admin/announces'}>Announces</Link><br /><br />
+      <Link className='link-to' to={'/admin/absences'}>Absences</Link><br /><br />
     </div> : <Navigate replace to='/login' /> 
   )
 }
