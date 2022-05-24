@@ -1,0 +1,130 @@
+.admin-student{
+    background: #d8d9e5;
+    height: 100vh;
+    .content{
+        margin-top: 60px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        .form-container{
+            width: 30%;
+            background: #fff;
+            border-radius: 10px;
+            height: 400px;
+            h3{
+                text-align: center;
+                padding-top: 20px;
+                color: #5173ed;
+            }
+            input, select{
+                display: block;
+                margin: 10px auto;
+                width: 200px;
+                height: 30px;
+                padding: 5px 10px;
+                border: 2px solid #5173ed;
+                border-radius: 5px;
+            }
+            .add-btn{
+                width: unset;
+                text-transform: capitalize;
+                padding: unset;
+                height: unset;
+                padding: 10px 15px;
+                font-weight: bold;
+                cursor: pointer;
+                background: rgb(2, 184, 2);
+                color: #fff;
+                transition: .3s;
+                border: none;
+                &:hover{
+                    background: rgb(1, 125, 1);
+                }
+            }
+        }
+        .table-container{
+            width: 65%;
+            background: #d8d9e5;
+            border-radius: 10px;
+            table{
+                border-radius: 10px;
+                display: block;
+                border-collapse: collapse;
+                width: 100%;
+                border-radius: 10px;
+                height: 500px;
+                overflow-y: scroll;
+                th {
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    background-color: #5173ed;
+                    color: #fff;
+                }
+                th,td{
+                    padding: 8px;
+                    text-transform: capitalize;
+                    text-align: center;
+                }
+                th:last-child{
+                    border-top-right-radius: 10px;
+                }
+                td{
+                    width: 30%;
+                }
+                .tr-tbody:last-child{
+                    td:first-child{
+                        border-bottom-left-radius: 10px;
+                    }
+                    td:last-child{
+                        border-bottom-right-radius: 10px;
+                    }
+                }
+                .tr-tbody:nth-child(even){
+                    background: #f2f2f2;
+                }
+                .tr-tbody:nth-child(odd){
+                    background: #fff;
+                }
+                .tr-tbody{
+                    &:hover{
+                        background: #ddd;
+                    }
+                }
+                button{
+                    font-size: 18px;
+                    color: #fff;
+                    padding: 5px 10px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: .3s;
+                }
+                .delete-btn{
+                    background: red;
+                    &:hover{
+                        background: rgb(170, 2, 2);
+                    }
+                }
+                .edit-btn{
+                    background: orange;
+                    &:hover{
+                        background: rgb(180, 118, 3);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.popup-content{
+    .select-inp{
+        width: 200px;
+        height: 29.5px;
+        margin: 0 auto;
+        display: block;
+    }
+}
