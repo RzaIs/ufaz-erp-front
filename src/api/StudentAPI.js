@@ -32,8 +32,7 @@ export const AddStudentAPI = async (details, token) => {
     firstName: details.firstName,
     lastName: details.lastName,
     groupId: details.groupId,
-    admissionYear: details.admissionYear,
-    level: "L0"
+    admissionYear: details.admissionYear
   }, {
     headers: {
       'Authorization': 'Bearer ' + token
