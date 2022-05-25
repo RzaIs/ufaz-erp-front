@@ -42,7 +42,7 @@ const Navbar = (props) => {
             <li className = {props.display}>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/students'}>Students</NavLink>
             </li>
-            <li>
+            <li className={props.display}>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/absences'}>Absences</NavLink>
             </li>
             <li className='user-info' title={user.firstName + ' '+ user.lastName}>
