@@ -28,7 +28,7 @@ function Timetable() {
   useEffect(() => {
     getLessons()
     console.log("HI")
-  }, [user.token, user.id])
+  }, [user])
 
   useEffect(() => {
     setWeekLessons(lessons.filter(lesson => lesson.week === week))

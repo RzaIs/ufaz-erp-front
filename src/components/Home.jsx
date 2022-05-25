@@ -7,14 +7,7 @@ import NavbarClient from "./NavbarClient";
 
 function Home() {
 
-  const { user, clearUser } = useUserContext()
-
-  const logout = () => {
-    let confirmed = window.confirm("Are you sure you want to logout?")
-    if (!confirmed) return
-
-    clearUser()
-  }
+  const { user } = useUserContext()
 
   return (user.logged ?
     <div>

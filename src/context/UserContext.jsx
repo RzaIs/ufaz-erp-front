@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext } from 'react'
 
 const userContext = createContext()
 
-const Role = {
+export const Role = {
   admin : 1,
   teacher : 2,
   student : 3

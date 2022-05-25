@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import { GetTeachersAPI } from '../../api/TeacherAPI'
 import { GetGroupsAPI } from '../../api/GroupAPI'
 import { GetSubjectsAPI } from '../../api/SubjectAPI'
@@ -107,10 +107,9 @@ function Lesson() {
     getTeachers()
     getGroups()
     getSubjects()
-  }, [user.token])
+  }, [user])
 
-  return (
-    user.logged ?
+  return (user.logged ? user.role === Role.admin ?
     <div>
       <h3>
         add lesson
@@ -119,6 +118,7 @@ function Lesson() {
         <input type="number" name="room" value={room} onChange={(e) => setRoom(e.target.value)} />
         <input type="number" name="week" value={week} onChange={(e) => setWeek(e.target.value)} />
         <select name="day" value={day} onChange={(e) => setDay(e.target.value)} >
+          <option disabled value={0}>Week day</option>
           <option value={1}>monday</option>
           <option value={2}>tuesday</option>
           <option value={3}>wednesday</option>
@@ -127,6 +127,7 @@ function Lesson() {
         </select>
         <input type="number" name="period" value={period} onChange={(e) => setPeriod(e.target.value)} />
         <select name="period" value={period} onChange={(e) => setPeriod(e.target.value)} >
+          <option disabled  value={0}>Hour period</option>
           <option value={0}>08:30 - 10:00</option>
           <option value={1}>10:15 - 11:45</option>
           <option value={2}>12:45 - 14:15</option>
@@ -134,12 +135,15 @@ function Lesson() {
           <option value={4}>16:15 - 17:45</option>
         </select>
         <select name="subjectID" value={subjectID} onChange={(e) => setSubjectID(e.target.value)}>
+          <option disabled  value={0}>Subject</option>
           {subjects.map(sbj => sbj)}
         </select>
         <select name='teacherID' value={teacherID} onChange={(e) => setTeacherID(e.target.value)}>
+          <option disabled  value={0}>Teacher</option>
           {teachers.map(opt => opt)}
         </select>
         <select name='groupID' value={groupID} onChange={(e) => setGroupID(e.target.value)}>
+          <option disabled  value={0}>Group</option>
           {groups.map(grp => grp)}
         </select>
         <input type="submit" value="add lesson" />
@@ -165,7 +169,7 @@ function Lesson() {
           )}
         </tbody>
       </table>
-    </div> : <Navigate replace to='/login' /> 
+    </div> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
   )
 }
 

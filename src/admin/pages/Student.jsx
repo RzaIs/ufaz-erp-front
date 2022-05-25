@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import { GetGroupsAPI } from '../../api/GroupAPI'
 import { AddStudentAPI, DeleteStudentAPI, GetStudentsAPI, UpdateStudentAPI } from '../../api/StudentAPI'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import Navbar from '../Navbar';
 
 function Student() {
@@ -63,6 +64,7 @@ function Student() {
       getStudents()
       setEmail("")
       setPassword("")
+      setConfPswd("")
       setFirstName("")
       setLastName("")
       setGroupId(0)
@@ -101,9 +103,9 @@ function Student() {
   useEffect(() => {
     getStudents()
     getGroups()
-  }, [user.token])
+  }, [user])
 
-  return (
+  return (user.logged ? user.role === Role.admin ?
     <div className='admin-student'>
       <Navbar />
       <div className="content">
@@ -114,7 +116,7 @@ function Student() {
             <input type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" />
             <input type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder='Last Name' />
             <select name='groupID' value={groupId} onChange={(e) => setGroupId(e.target.value)}>
-              {/* <option disabled selected value={0}>Group</option> */}
+              <option disabled  value={0}>Select group</option>
               {groups.map(grp => grp)}
             </select>
             <input type="number" name="admYear" value={admYear} onChange={(e) => setAdmYear(e.target.value)} placeholder="Admission Year" />
@@ -170,8 +172,8 @@ function Student() {
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
+      </div> 
+    </div> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
   )
 }
 

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { Navigate } from 'react-router-dom'
 import { AddAnnounceAPI, DeleteAnnounceAPI, GetAnnouncesAPI, UpdateAnnounceAPI } from '../../api/AnnounceAPI'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import Popup from 'reactjs-popup'
 import Navbar from '../Navbar';
 
@@ -18,7 +18,7 @@ function Announce() {
     GetAnnouncesAPI(user.token).then((response) => {
       if (response !== null) {
         response.announces.forEach((announce) => {
-          announce.publishDate = format(announce.publishDate, "yyyy-MM-dd HH:mm")
+          announce.publishDate = format(announce.publishDate, "YYYY-MM-DD HH:mm")
         })
         setAnnounces(response.announces)
       }
@@ -31,7 +31,7 @@ function Announce() {
     AddAnnounceAPI({
       title: title,
       text: text
-    }, user.token).then((r) => {
+    }, user.token).then((response) => {
       getAnnounces()
       setTitle("")
       setText("")
@@ -57,9 +57,9 @@ function Announce() {
     }, user.token).then(getAnnounces)
   }
 
-  useEffect(getAnnounces, [user.token])
+  useEffect(getAnnounces, [user])
 
-  return (user.logged ?
+  return (user.logged ? user.role === Role.admin ?
     <div className='admin-announce'>
       <Navbar />
       <div className="content">
@@ -110,7 +110,7 @@ function Announce() {
           </table>
         </div>
       </div>
-    </div> : <Navigate replace to='/login' />
+    </div> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
   )
 }
 

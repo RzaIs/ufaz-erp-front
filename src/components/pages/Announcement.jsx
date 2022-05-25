@@ -48,7 +48,7 @@ function Announcement() {
     }, user.token).then(getAnnounces)
   }
 
-  useEffect(getAnnounces, [user.token])
+  useEffect(getAnnounces, [user])
 
   return (
     <div>

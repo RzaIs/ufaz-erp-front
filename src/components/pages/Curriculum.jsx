@@ -35,7 +35,7 @@ function Curriculum() {
 
   useEffect(() => {
     getLessons()
-  }, [user.token])
+  }, [user])
 
   return (
     <div>

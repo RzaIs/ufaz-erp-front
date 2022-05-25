@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useUserContext } from '../context/UserContext'
 import Popup from 'reactjs-popup'

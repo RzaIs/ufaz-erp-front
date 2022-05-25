@@ -15,6 +15,7 @@ import Timetable from "./components/pages/Timetable";
 import Attendance from "./components/pages/Attendance";
 import Curriculum from "./components/pages/Curriculum";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import UnAuth from "./components/UnAuth";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path='/admin/lessons' element={<Lesson />} />
           <Route path='/admin/teachers' element={<Teacher />} />
           <Route path='/admin/students' element={<Student />} />
+          <Route path='/unauth' element={<UnAuth />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </Router>
