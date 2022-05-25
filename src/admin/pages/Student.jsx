@@ -114,7 +114,7 @@ function Student() {
             <input type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" />
             <input type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder='Last Name' />
             <select name='groupID' value={groupId} onChange={(e) => setGroupId(e.target.value)}>
-              <option disabled selected>Group</option>
+              {/* <option disabled selected value={0}>Group</option> */}
               {groups.map(grp => grp)}
             </select>
             <input type="number" name="admYear" value={admYear} onChange={(e) => setAdmYear(e.target.value)} placeholder="Admission Year" />

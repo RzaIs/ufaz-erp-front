@@ -1,51 +1,6 @@
 .admin-subject{
     background: #d8d9e5;
     height: 100vh;
-    nav{
-        background: #5173ed;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 20px 0;
-        .title{
-            width: 30%;
-            h1{
-                font-size: 35px;
-                .link-to{
-                    font-family: cursive;
-                    color: #fff;
-                }
-            }
-        }
-        .links-to-pages{
-            width: 60%;
-            ul{
-                display: flex;
-                justify-content: space-around;
-                list-style: none;
-                align-items: center;
-                li{
-                    font-size: 18px;
-                    .link-to{
-                        color: #171d29;
-                        font-weight: bolder;
-                        transition: .3s;
-                        &:hover{
-                            color: #fff;
-                        }
-                    }
-                }
-            }
-        }
-        .active{
-            color: #fff;
-            font-weight: bold;
-            text-decoration: none;
-        }
-    }
-    .link-to{
-        text-decoration: none;
-    }
     form{
         margin-top: 30px;
         label{
@@ -150,6 +105,7 @@
 }
 
 .popup-content {
+    display: block;
     text-align: center;
     margin: auto;
     background: rgb(255, 255, 255);
@@ -163,6 +119,8 @@
         padding: 5px;
     }
     .btn{
+        display: block;
+        margin: 0 auto;
         width: unset;
         padding: 8px 20px;
         color: red;
@@ -175,6 +133,7 @@
         font-weight: bolder;
         border-radius: 10px;
         transition: .3s;
+        margin-bottom: 30px;
         &:hover{
             background: #0f33b2;
         }
