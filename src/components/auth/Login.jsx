@@ -18,6 +18,7 @@ function Login() {
     if (response === null) {
       return false
     } else {
+      console.log(response)
       setUser({
         logged: true,
         id: response.user.id,

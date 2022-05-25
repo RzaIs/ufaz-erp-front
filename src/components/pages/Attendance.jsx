@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import GetAbsenceAPI from '../../api/AbsenceAPI'
+import { GetAbsenceOfStudentAPI } from '../../api/AbsenceAPI'
 import { useUserContext } from '../../context/UserContext'
 
 function Attendance() {
@@ -9,9 +9,9 @@ function Attendance() {
   const [absences, setAbsences] = useState([])
 
   const getAbsences = () => {
-    GetAbsenceAPI(user.token).then((response) => {
+    GetAbsenceOfStudentAPI(user.token).then((response) => {
       if (response !== null) {
-        // setAbsences(response)
+        setAbsences(response.absences)
       }
     })
   }
@@ -19,7 +19,7 @@ function Attendance() {
   useEffect(getAbsences, [user.token])
 
   return (
-    <div>Attendance</div>
+    <div>{JSON.stringify(absences)}</div>
   )
 }
 

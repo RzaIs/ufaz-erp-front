@@ -3,7 +3,7 @@ import { STUDENT_URL } from "./StudentAPI"
 
 const ABSENCE_URL = 'api/absences'
 
-const GetAbsenceAPI = async (token) => {
+export const GetAbsenceAPI = async (token) => {
 
   let result = null
 
@@ -12,7 +12,7 @@ const GetAbsenceAPI = async (token) => {
       'Authorization': 'Bearer ' + token
     }
   }).then((response) => {
-    // console.log(response)
+    result = response.data
   }).catch((error) => {
     console.log(error)
   })
@@ -21,6 +21,7 @@ const GetAbsenceAPI = async (token) => {
 }
 
 export const AddAbsenceAPI = async (details, token) => {
+
   let result = null
 
   await Axios.post(ABSENCE_URL, {
@@ -31,8 +32,12 @@ export const AddAbsenceAPI = async (details, token) => {
       'Authorization': 'Bearer ' + token
     }
   }).then((response) => {
-    result = response
+    result = response.data
+  }).catch((error) => {
+    console.log(error)
   })
+
+  return result
 }
 
 export const GetAbsenceOfStudentAPI = async (token) => {
@@ -44,7 +49,7 @@ export const GetAbsenceOfStudentAPI = async (token) => {
       'Authorization': 'Bearer ' + token
     }
   }).then((response) => {
-    result = response.lessons
+    result = response.data
   }).catch((error) => {
     console.log(error)
   })
@@ -68,5 +73,3 @@ export const GetAbsenceOfLessonAPI = async (id, token) => {
 
   return result
 }
-
-export default GetAbsenceAPI;

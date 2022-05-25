@@ -3,15 +3,6 @@ import { NavLink } from 'react-router-dom'
 import { useUserContext } from '../context/UserContext'
 import Popup from 'reactjs-popup'
 
-/*const defaultUserSate = {
-  logged: false,
-  id: 0,
-  email: "",
-  firstName: "",
-  lastName: "",
-  token: ""
-}*/
-
 const Navbar = () => {
 
   const { user,clearUser } = useUserContext()
@@ -22,12 +13,6 @@ const Navbar = () => {
 
     clearUser()
   }
-
-
-
-  useEffect(()=> {
-    console.log(user)
-  }, [user])
 
   return (
     <nav>
@@ -55,6 +40,9 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/students'}>Students</NavLink>
+            </li>
+            <li>
+              <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/absences'}>Absences</NavLink>
             </li>
             <li className='user-info' title={user.firstName + ' '+ user.lastName}>
               <Popup  trigger={<div>{user.firstName.slice(0,1) + '' +user.lastName.slice(0,1)}</div>} position='left top'>
