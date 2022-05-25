@@ -9,6 +9,7 @@ nav{
         h1{
             font-size: 35px;
             .link-to{
+                text-decoration: none;
                 font-family: cursive;
                 color: #fff;
             }
@@ -24,6 +25,7 @@ nav{
             li{
                 font-size: 18px;
                 .link-to{
+                    text-decoration: none;
                     color: #171d29;
                     font-weight: bolder;
                     transition: .3s;
@@ -34,6 +36,16 @@ nav{
                 .active{
                     color: #fff;
                 }
+            }
+            .user-info{
+                color: #5173ed;
+                font-weight: bolder;
+                background: #fff;
+                font-size: 24px;
+                padding: 20px;
+                border-radius: 50%;
+                border: 3px solid #fff;
+                cursor: pointer;
             }
         }
     }

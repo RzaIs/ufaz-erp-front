@@ -106,7 +106,7 @@ function Subject() {
                   <td className='td-center'>{subject.credits}</td>
                   <td className='td-center'>{subject.totalNumberOfLessons}</td>
                   <td>
-                    <button onClick={() => deleteSubject(subject.id)} title='Delete' ><i className="fa-solid fa-trash-can"></i></button>
+                    <button onClick={() => deleteSubject(subject.id)} title='Delete' className='delete-btn' ><i className="fa-solid fa-trash-can"></i></button>
                   </td>
                   <td>
                     <Popup className='edit-popup' trigger={<button className='edit-btn' title='Edit'><i className="fa-solid fa-pen-to-square"></i></button>} position='right center'>
