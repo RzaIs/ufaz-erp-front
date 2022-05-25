@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { useUserContext } from '../context/UserContext'
 import Popup from 'reactjs-popup'
 
-const Navbar = () => {
+
+const Navbar = (props) => {
 
   const { user,clearUser } = useUserContext()
 
@@ -23,22 +24,22 @@ const Navbar = () => {
         </div>
         <div className="links-to-pages">
           <ul>
-            <li>
+            <li className = {props.display}>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/subjects'}>Subjects</NavLink>
             </li>
-            <li>
+            <li className = {props.display}>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/lessons'}>Lessons</NavLink>
             </li>
-            <li>
+            <li className = {props.display}>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/groups'}>Groups</NavLink>
             </li>
-            <li>
+            <li className = {props.display}>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/teachers'}>Teachers</NavLink>
             </li>
-            <li>
+            <li className = {props.display}>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/announces'}>Announces</NavLink>
             </li>
-            <li>
+            <li className = {props.display}>
               <NavLink className={(navData) => navData.isActive ? "link-to active" : "link-to"} to={'/admin/students'}>Students</NavLink>
             </li>
             <li>
@@ -48,13 +49,17 @@ const Navbar = () => {
               <Popup  trigger={<div>{user.firstName.slice(0,1) + '' +user.lastName.slice(0,1)}</div>} position='left top'>
                   <h5>{user.email}</h5>
                   <h5 style={{margin: '20px 0'}}>{user.firstName} {user.lastName}</h5>
-                  <buttonc className="btn" onClick={logout} style={{marginBottom: '20px',width: '120px'}}>Log Out</buttonc>
+                  <button className="btn" onClick={logout} style={{marginBottom: '20px',width: '120px'}}>Log Out</button>
               </Popup>
             </li>
           </ul>
         </div>
       </nav>
   )
+}
+
+Navbar.defaultProps = {
+  display: 'visible'
 }
 
 export default Navbar
