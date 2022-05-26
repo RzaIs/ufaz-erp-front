@@ -48,7 +48,7 @@
                 border-collapse: collapse;
                 width: 70%;
                 border-radius: 10px;
-                height: 500px;
+                max-height: 500px;
                 overflow-y: scroll;
                 th {
                     position: -webkit-sticky;
@@ -62,7 +62,6 @@
                 }
                 th,td{
                     padding: 8px;
-                    text-transform: capitalize;
                     text-align: center;
                 }
                 th:last-child{
