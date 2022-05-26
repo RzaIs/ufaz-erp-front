@@ -1,0 +1,177 @@
+.announcement{
+    height: 100vh;
+    background: #d8d9eb;
+    .content{
+        display: flex;
+        justify-content: space-around;
+        margin: 20px;
+        .announce-list{
+            max-height: 640px;
+            width: 70%;
+            padding: 10px;
+            border-radius: 10px;
+            .announce-info{
+                position: relative;
+                margin-bottom: 30px;
+                background: #fff;
+                padding: 10px;
+                border-radius: 10px;
+                h3{
+                    font-size: 24px;
+                    span:first-child{
+                        color: #5173ed;
+                    }
+                    span:last-child{
+                        font-size: 14px;
+                        margin-left: 20px;
+                        font-weight: normal;
+                        color: rgb(163, 161, 161);
+                        transition: .3s;
+                        cursor: pointer;
+                        &:hover{
+                            color: #5173ed;
+                        }
+                    }
+                }
+                h5{
+                    font-size: 18px;
+                    margin: 10px 0;
+                    span{
+                        color: #5173ed;
+                    }
+                }
+                p{
+                    font-size: 16px;
+                    color: rgb(107, 106, 106);
+                    width: 80%;
+                }
+                .date{
+                    font-size: 12px;
+                    margin: 10px 0;
+                    color: orange;
+                }
+                .edit-btn{
+                    position: absolute;
+                    top: 2%;
+                    right: 12%;
+                    display: block;
+                    margin-top: 5px;
+                    padding: 10px 20px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    color: #fff;
+                    background: orange;
+                    border: none;
+                    border-radius: 5px;
+                    transition: .3s;
+                    &:hover{
+                        background: rgb(180, 118, 3);
+                    }
+                }
+                .delete-btn{
+                    position: absolute;
+                    top: 2%;
+                    right: 2%;
+                    text-align: center;
+                    display: block;
+                    margin-top: 5px;
+                    padding: 10px 20px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    color: #fff;
+                    background: red;
+                    border: none;
+                    border-radius: 5px;
+                    transition: .3s;
+                    &:hover{
+                        background: rgb(170, 2, 2);
+                    }
+                }
+            }
+        }
+        .form-container{
+            padding: 10px;
+            border-radius: 10px;
+            background: #fff;
+            margin-top: 10px;
+            width: 25%;
+            h3{
+                text-align: center;
+                color: #5173ed;
+                margin-bottom: 20px;
+            }
+            input{
+                padding: 5px 15px;
+                border: 2px solid #5173ed;
+                border-radius: 5px;
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+            textarea{
+                padding: 5px 15px;
+                border: 2px solid #5173ed;
+                border-radius: 5px;
+                display: block;
+                margin: 10px 0;
+                width: 80%;
+                height: 180px;
+                margin: 0 auto;
+            }
+            .add-btn{
+                padding: unset;
+                width: 20%;
+                padding: 7px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #fff;
+                background: rgb(2, 184, 2);
+                transition: .3s;
+                border: none;
+                cursor: pointer;
+                margin-top: 30px;
+                &:hover{
+                    background: rgb(1, 125, 1);
+                }
+            }
+        }
+    }
+}
+
+.edit-form{
+    input{
+        padding: 5px 15px;
+        border: 2px solid #5173ed;
+        border-radius: 5px;
+        display: block;
+        margin: 10px auto;
+        width: 80%;
+    }
+    textarea{
+        padding: 5px 15px;
+        border: 2px solid #5173ed;
+        border-radius: 5px;
+        display: block;
+        margin: 10px 0;
+        width: 80%;
+        height: 100px;
+        margin: 0 auto;
+    }
+    .apply-btn{
+        background: #5173ed;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: .3s;
+        margin: 10px auto;
+        padding: 15px 15px;
+        font-size: 14px;
+        width: 15%;
+        &:hover{
+            background: #0f33b2;
+            border-color: #0f33b2;
+        }
+    }
+}
