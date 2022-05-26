@@ -75,10 +75,10 @@ function Announce() {
           <table>
             <thead>
               <tr>
-                <th>title</th>
-                <th>text</th>
-                <th>publishDate</th>
-                <th>author</th>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Publish Date</th>
+                <th>Author</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -87,7 +87,7 @@ function Announce() {
               {announces.map((announce) =>
                 <tr key={announce.id} className="tr-tbody">
                   <td>{announce.title}</td>
-                  <td>{announce.text}</td>
+                  <td className='td-text'>{announce.text}</td>
                   <td>{announce.publishDate}</td>
                   <td>{announce.author.firstName} {announce.author.lastName} ({announce.author.email})</td>
                   <td>
