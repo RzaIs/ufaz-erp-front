@@ -124,9 +124,9 @@ function Teacher() {
                         <br />
                         <input type='text' name='lastName' defaultValue={teacher.lastName} />
                         <br />
-                        <input type='password' name='password' />
+                        <input type='password' name='password' placeholder='password' />
                         <br />
-                        <input type='password' name='confPswd' />
+                        <input type='password' name='confPswd' placeholder='confirm password' />
                         <br />
                         <input type='submit' value='update subject' className='btn' />
                       </form>
