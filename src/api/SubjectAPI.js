@@ -71,6 +71,9 @@ export const GetSubjectsOfStudentAPI = async (id, token) => {
     }
   }).then((response) => {
     result = response.data
+    result.subjects.sort((a, b) => {
+      return a.id - b.id
+    })
   }).catch((error) => {
     console.log(error)
   })
