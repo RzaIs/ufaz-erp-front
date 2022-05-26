@@ -30,7 +30,6 @@ function Timetable() {
 
   useEffect(() => {
     getLessons()
-    console.log("HI")
   }, [user.token, user.id])
 
   useEffect(() => {
@@ -106,12 +105,48 @@ function Timetable() {
 }
 
 function LessonBox({ lesson }) {
+  const [bg, setBg] = useState({});
+  const generateBgColor = () =>{
+    // let r = Math.floor(Math.random() * 256);
+    // let g = Math.floor(Math.random() * 256);
+    // let b = Math.floor(Math.random() * 256);
+
+    let r = lesson.subject.name.charCodeAt(0);
+    let g = lesson.subject.name.charCodeAt(1);
+    let b = lesson.subject.name.charCodeAt(2);
+
+    if(r<100 || g<100 || b<100){
+      r+=100;
+      g+=100;
+      b+=100;
+      if(r>255){
+        r = 255;
+      }
+      if(g>255){
+        g = 255;
+      }
+      if(b>255){
+        b = 255;
+      }
+    }
+
+    let bgColor = `rgb(${r},${g},${b})`;
+    console.log(bgColor);
+    setBg({backgroundColor: bgColor});
+  }
+
+
+  useEffect(()=>{
+
+    if(lesson !== undefined){
+      generateBgColor();
+    }
+  },[lesson]);
   return (lesson === undefined ? <td></td> :
-    <td title={`${lesson.group.name}\n${lesson.room}\n${lesson.teacher.firstName} ${lesson.teacher.lastName}`}>
-      {/* // lesson.group.name +
-      // lesson.room +
-      // lesson.teacher.firstName + lesson.teacher.lastName + */}
-      {lesson.subject.name}
+    <td className='lesson-info' title={`${lesson.group.name}\n${lesson.subject.name}\n${lesson.room}\n${lesson.teacher.firstName} ${lesson.teacher.lastName}`} style={bg}>
+      <span className='lesson-room'>{lesson.room}</span>
+      {lesson.subject.name.slice(0,3).toUpperCase()}
+      <span className='lesson-teacher'>{lesson.teacher.firstName.slice(0,1)+lesson.teacher.lastName.slice(0,1)}</span>
     </td>
   )
 }
