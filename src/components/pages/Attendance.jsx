@@ -21,7 +21,9 @@ function Attendance() {
   return (
     <div>
       {absences.map(abs =>
-        <div>{JSON.stringify(abs)}</div>
+        <div key={abs.id} >
+          <div>{abs.date}</div>
+        </div>
       )}
     </div>
   )

@@ -125,7 +125,6 @@ function Lesson() {
           <option value={4}>thursday</option>
           <option value={5}>friday</option>
         </select>
-        <input type="number" name="period" value={period} onChange={(e) => setPeriod(e.target.value)} />
         <select name="period" value={period} onChange={(e) => setPeriod(e.target.value)} >
           <option disabled  value={0}>Hour period</option>
           <option value={0}>08:30 - 10:00</option>

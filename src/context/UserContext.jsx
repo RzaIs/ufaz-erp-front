@@ -15,6 +15,7 @@ const defaultUserSate = {
   firstName: "",
   lastName: "",
   token: "",
+  group: "",
   role: null
 }
 
