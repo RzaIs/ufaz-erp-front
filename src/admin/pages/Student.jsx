@@ -129,11 +129,11 @@ function Student() {
           <table>
             <thead>
               <tr>
-                <th>firt name</th>
-                <th>last name</th>
-                <th>email</th>
-                <th>admission year</th>
-                <th>group</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Admission Year</th>
+                <th>Group</th>
                 <th></th>
                 <th></th>
               </tr>
