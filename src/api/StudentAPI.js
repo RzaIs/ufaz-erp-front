@@ -3,23 +3,6 @@ import { LESSON_URL } from "./LessonAPI"
 
 export const STUDENT_URL = 'api/students'
 
-export const GetStudentAPI = async (id, token) => {
-
-  let result = null
-
-  await Axios.get(STUDENT_URL + '/' + id, {
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
-  }).then((response) => {
-    result = response.data
-  }).catch((error) => {
-    console.log(error)
-  })
-
-  return result
-}
-
 export const GetStudentsAPI = async (token) => {
 
   let result = null
