@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { GetAnnouncesAPI } from '../../api/AnnounceAPI'
 import { useUserContext } from '../../context/UserContext'
 import { AddAnnounceAPI, UpdateAnnounceAPI } from '../../api/AnnounceAPI'
+import NavbarClient from '../NavbarClient'
 
 function Announcement() {
 
@@ -51,18 +52,25 @@ function Announcement() {
   useEffect(getAnnounces, [user])
 
   return (
-    <div>
-      {announces.map((announce) => <AnnounceView
-        key={announce.id}
-        details={announce}
-        updateAnnounce={updateAnnounce}
-      />)}
-      <h3>Add Announcement</h3>
-      <form onSubmit={addAnnounce}>
-        <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <input type="text" name="text" value={text} onChange={(e) => setText(e.target.value)} />
-        <input type="submit" value="add Announcement" />
-      </form>
+    <div className='announcement'>
+      <NavbarClient />
+      <div className="content">
+        <div className="announce-list">
+          {announces.map((announce) => <AnnounceView
+            key={announce.id}
+            details={announce}
+            updateAnnounce={updateAnnounce}
+          />)}
+        </div>
+        <div className="form-container">
+          <h3>Add Announcement</h3>
+          <form onSubmit={addAnnounce}>
+            <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter Title" />
+            <textarea name="text" value={text} nChange={(e) => setText(e.target.value)} placeholder="Enter Announcement Text"></textarea>
+            <input type="submit" value="Add" className='add-btn' />
+          </form>
+        </div>
+      </div>
     </div>
   )
 }
@@ -75,27 +83,29 @@ function AnnounceView({ details, userEmail, updateAnnounce }) {
 
   return (
     <>{editMode ?
-      <form onSubmit={(e) => {
+      <form className='edit-form' onSubmit={(e) => {
         setEditMode(false)
         updateAnnounce(e)
       }} >
         <input type="hidden" name="id" value={details.id} />
-        <input type="text" name="title" defaultValue={details.title} />
-        <input type="text" name="text" defaultValue={details.text} />
-        <input type="submit" value="apply changes" />
+        <input type="text" name="title" defaultValue={details.title} placeholder="Enter title" />
+        <textarea name="text" defaultValue={details.text} placeholder="Enter announce text"></textarea>
+        <input type="submit" value="Apply Changes" className='apply-btn' />
       </form>
       :
-      <div>
+      <div className='announce-info'>
+        <h3>Author : <span>{details.author.firstName} {details.author.lastName}</span>  <span>{details.author.email}</span></h3>
+        <h5>Title : <span>{details.title}</span></h5>
+        <p>{details.text}</p>
         {details.author.id === user.id ?
-          <button onClick={(e) => setEditMode(!editMode)}>edit</button> : <></>
+          <>
+            <button className='edit-btn' onClick={(e) => setEditMode(!editMode)}>Edit</button>
+            <button className='delete-btn'>Delete</button>
+          </> : <></>
         }
-        <div>{details.author.firstName} {details.author.lastName}</div>
-        <div>{details.author.email}</div>
-        <div>{details.title}</div>
-        <div>{details.text}</div>
-        <div>{details.publishDate}</div>
+        <p className='date'>{details.publishDate}</p>
       </div>}
-      <hr />
+
     </>
   )
 }
