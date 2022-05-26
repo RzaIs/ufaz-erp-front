@@ -6,6 +6,7 @@ import { GetTeachersAPI } from '../../api/TeacherAPI'
 import { GetGroupsAPI } from '../../api/GroupAPI'
 import { GetSubjectsAPI } from '../../api/SubjectAPI'
 import { AddLessonAPI, DeleteLessonAPI, GetLessonsAPI, UpdateLessonAPI } from '../../api/LessonAPI'
+import Navbar from '../Navbar';
 
 function Lesson() {
 
@@ -136,102 +137,119 @@ function Lesson() {
   }, [user])
 
   return (user.logged ? user.role === Role.admin ?
-    <div>
-      <h3>
-        add lesson
-      </h3>
-      <form onSubmit={addLesson}>
-        <input type="number" name="room" value={room} onChange={(e) => setRoom(e.target.value)} />
-        <input type="number" name="week" value={week} onChange={(e) => setWeek(e.target.value)} />
-        <select name="day" value={day} onChange={(e) => setDay(e.target.value)} >
-          <option disabled value={0}>Week day</option>
-          <option value={1}>monday</option>
-          <option value={2}>tuesday</option>
-          <option value={3}>wednesday</option>
-          <option value={4}>thursday</option>
-          <option value={5}>friday</option>
-        </select>
-        <select name="period" value={period} onChange={(e) => setPeriod(e.target.value)} >
-          <option disabled value={0}>Hour period</option>
-          <option value={0}>08:30 - 10:00</option>
-          <option value={1}>10:15 - 11:45</option>
-          <option value={2}>12:45 - 14:15</option>
-          <option value={3}>14:30 - 16:00</option>
-          <option value={4}>16:15 - 17:45</option>
-        </select>
-        <select name="subjectID" value={subjectID} onChange={(e) => setSubjectID(e.target.value)}>
-          <option disabled value={0}>Subject</option>
-          {subjects.map(sbj => sbj)}
-        </select>
-        <select name='teacherID' value={teacherID} onChange={(e) => setTeacherID(e.target.value)}>
-          <option disabled value={0}>Teacher</option>
-          {teachers.map(opt => opt)}
-        </select>
-        <select name='groupID' value={groupID} onChange={(e) => setGroupID(e.target.value)}>
-          <option disabled value={0}>Group</option>
-          {groups.map(grp => grp)}
-        </select>
-        <input type="submit" value="add lesson" />
-      </form>
-      <table>
-        <thead>
-
-        </thead>
-        <tbody>
-          {lessons.map((lesson) =>
-            <tr key={lesson.lessonId} >
-              <td>{lesson.subject.name}</td>
-              <td>{lesson.group.name}</td>
-              <td>{lesson.teacher.firstName} {lesson.teacher.lastName}</td>
-              <td>{lesson.room}</td>
-              <td>{lesson.week}</td>
-              <td>{lesson.day}</td>
-              <td>{lesson.period}</td>
-              <td>
-                <button onClick={() => deleteLesson(lesson.lessonId)} className="delete-btn" title="Delete"><i className="fa-solid fa-trash-can" /></button>
-              </td>
-              <td>
-                <Popup className='edit-popup' trigger={<button className='edit-btn' title='Edit'><i className="fa-solid fa-pen-to-square"></i></button>} position='right top'>
-                  <form onSubmit={updateLesson}>
-                    <input type="hidden" name="id" defaultValue={lesson.lessonId}/>
-                    <input type="number" name="room" defaultValue={lesson.room} />
-                    <input type="number" name="week" defaultValue={lesson.week} />
-                    <select name="day" defaultValue={lesson.day} >
-                      <option disabled value={0}>Week day</option>
-                      <option value={1}>monday</option>
-                      <option value={2}>tuesday</option>
-                      <option value={3}>wednesday</option>
-                      <option value={4}>thursday</option>
-                      <option value={5}>friday</option>
-                    </select>
-                    <select name="period" defaultValue={lesson.period} >
-                      <option disabled value={0}>Hour period</option>
-                      <option value={0}>08:30 - 10:00</option>
-                      <option value={1}>10:15 - 11:45</option>
-                      <option value={2}>12:45 - 14:15</option>
-                      <option value={3}>14:30 - 16:00</option>
-                      <option value={4}>16:15 - 17:45</option>
-                    </select>
-                    <select name="subjectId" defaultValue={lesson.subject.id} >
-                      <option disabled value={0}>Subject</option>
-                      {subjects.map(sbj => sbj)}
-                    </select>
-                    <select name='teacherId' defaultValue={lesson.teacher.id} >
-                      <option disabled value={0}>Teacher</option>
-                      {teachers.map(opt => opt)}
-                    </select>
-                    <select name='groupId' defaultValue={lesson.group.id} >
-                      <option disabled value={0}>Group</option>
-                      {groups.map(grp => grp)}
-                    </select>
-                    <input type="submit" value="add lesson" />
-                  </form>
-                </Popup>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    <div className='admin-lesson'>
+      <Navbar />
+      <div className="content">
+        <div className="form-container">
+          <h3>
+            Add Lesson
+          </h3>
+          <form onSubmit={addLesson}>
+            <input type="number" name="room" value={room} onChange={(e) => setRoom(e.target.value)} placeholder="Room" />
+            <input type="number" name="week" value={week} onChange={(e) => setWeek(e.target.value)} placeholder="Week" />
+            <select name="day" value={day} onChange={(e) => setDay(e.target.value)} >
+              <option disabled value={0}>Week day</option>
+              <option value={1}>Monday</option>
+              <option value={2}>Tuesday</option>
+              <option value={3}>Wednesday</option>
+              <option value={4}>Thursday</option>
+              <option value={5}>Friday</option>
+            </select>
+            <select name="period" value={period} onChange={(e) => setPeriod(e.target.value)} >
+              <option disabled value={0}>Hour period</option>
+              <option value={0}>08:30 - 10:00</option>
+              <option value={1}>10:15 - 11:45</option>
+              <option value={2}>12:45 - 14:15</option>
+              <option value={3}>14:30 - 16:00</option>
+              <option value={4}>16:15 - 17:45</option>
+            </select>
+            <select name="subjectID" value={subjectID} onChange={(e) => setSubjectID(e.target.value)}>
+              <option disabled value={0}>Subject</option>
+              {subjects.map(sbj => sbj)}
+            </select>
+            <select name='teacherID' value={teacherID} onChange={(e) => setTeacherID(e.target.value)}>
+              <option disabled value={0}>Teacher</option>
+              {teachers.map(opt => opt)}
+            </select>
+            <select name='groupID' value={groupID} onChange={(e) => setGroupID(e.target.value)}>
+              <option disabled value={0}>Group</option>
+              {groups.map(grp => grp)}
+            </select>
+            <input type="submit" value="Add" className='add-btn' />
+          </form>
+        </div>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Group</th>
+                <th>Teacher</th>
+                <th>Room</th>
+                <th>Week</th>
+                <th>Day</th>
+                <th>Period</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {lessons.map((lesson) =>
+                <tr key={lesson.lessonId} >
+                  <td>{lesson.subject.name}</td>
+                  <td>{lesson.group.name}</td>
+                  <td className='td-teacher'>{lesson.teacher.firstName} {lesson.teacher.lastName}</td>
+                  <td>{lesson.room}</td>
+                  <td>{lesson.week}</td>
+                  <td>{lesson.day}</td>
+                  <td>{lesson.period}</td>
+                  <td>
+                    <button onClick={() => deleteLesson(lesson.lessonId)} className="delete-btn" title="Delete"><i className="fa-solid fa-trash-can" /></button>
+                  </td>
+                  <td>
+                    <Popup className='edit-popup' trigger={<button className='edit-btn' title='Edit'><i className="fa-solid fa-pen-to-square"></i></button>} position='right center'>
+                      <form className='edit-form' onSubmit={updateLesson}>
+                        <input type="hidden" name="id" defaultValue={lesson.lessonId} />
+                        <input type="number" name="room" defaultValue={lesson.room} />
+                        <input type="number" name="week" defaultValue={lesson.week} />
+                        <select name="day" defaultValue={lesson.day} >
+                          <option disabled value={0}>Week day</option>
+                          <option value={1}>monday</option>
+                          <option value={2}>tuesday</option>
+                          <option value={3}>wednesday</option>
+                          <option value={4}>thursday</option>
+                          <option value={5}>friday</option>
+                        </select>
+                        <select name="period" defaultValue={lesson.period} >
+                          <option disabled value={0}>Hour period</option>
+                          <option value={0}>08:30 - 10:00</option>
+                          <option value={1}>10:15 - 11:45</option>
+                          <option value={2}>12:45 - 14:15</option>
+                          <option value={3}>14:30 - 16:00</option>
+                          <option value={4}>16:15 - 17:45</option>
+                        </select>
+                        <select name="subjectId" defaultValue={lesson.subject.id} >
+                          <option disabled value={0}>Subject</option>
+                          {subjects.map(sbj => sbj)}
+                        </select>
+                        <select name='teacherId' defaultValue={lesson.teacher.id} >
+                          <option disabled value={0}>Teacher</option>
+                          {teachers.map(opt => opt)}
+                        </select>
+                        <select name='groupId' defaultValue={lesson.group.id} >
+                          <option disabled value={0}>Group</option>
+                          {groups.map(grp => grp)}
+                        </select>
+                        <input type="submit" value="add lesson" className='btn' />
+                      </form>
+                    </Popup>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
   )
 }
