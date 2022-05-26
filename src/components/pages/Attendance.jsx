@@ -21,7 +21,7 @@ function TeacherAttendance() {
   const [lessons, setLessons] = useState([])
 
   const getLessons = () => {
-    GetLessonsOfTeacherAPI(user.token).then((response) => {
+    GetLessonsOfTeacherAPI(user.id, user.token).then((response) => {
       setLessons(response.lessons)
     })
   }
@@ -31,7 +31,19 @@ function TeacherAttendance() {
   }, [user])
 
   return (
-    <></>
+    <div>
+      {lessons.map((lesson) =>
+        <div key={lesson.lessonId}>
+          <div>{lesson.subject.name}</div>
+          <div>{weekDay(lesson.day)}</div>
+          <div>{lesson.week}</div>
+          <div>{lesson.group.name}</div>
+          <div>
+            <StudentList lessonId={lesson.lessonId} />
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 

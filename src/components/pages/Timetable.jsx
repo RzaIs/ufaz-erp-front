@@ -1,7 +1,6 @@
-import { set } from 'date-fns';
 import { useState, useEffect } from 'react';
-import { GetLessonsOfStudentAPI } from '../../api/LessonAPI';
-import { useUserContext } from '../../context/UserContext';
+import { GetLessonsOfStudentAPI, GetLessonsOfTeacherAPI } from '../../api/LessonAPI';
+import { Role, useUserContext } from '../../context/UserContext';
 import NavbarClient from '../NavbarClient';
 
 const periods = [0, 1, 2, 3, 4]
@@ -20,11 +19,19 @@ function Timetable() {
   }
 
   const getLessons = () => {
-    GetLessonsOfStudentAPI(user.id, user.token).then((response) => {
-      if (response !== null) {
-        setLessons(response.lessons)
-      }
-    })
+    if (user.role === Role.student) {
+      GetLessonsOfStudentAPI(user.id, user.token).then((response) => {
+        if (response !== null) {
+          setLessons(response.lessons)
+        }
+      })
+    } else if (user.role === Role.teacher) {
+      GetLessonsOfTeacherAPI(user.id, user.token).then((response) => {
+        if (response !== null) {
+          setLessons(response.lessons)
+        }
+      })
+    }
   }
 
 
@@ -43,7 +50,7 @@ function Timetable() {
         <button onClick={() => setWeek(week - 1)}><i className="fa-solid fa-arrow-left"></i></button>
         <button onClick={() => setWeek(week + 1)}><i className="fa-solid fa-arrow-right"></i></button>
       </div>
-      <h2>{user.group+' '+user.firstName + ' ' + user.lastName + ' - Week ' + week}</h2>
+      <h2>{user.group + ' ' + user.firstName + ' ' + user.lastName + ' - Week ' + week}</h2>
       <div className="table-container">
         <table>
           <thead>
@@ -105,43 +112,62 @@ function Timetable() {
 }
 
 function LessonBox({ lesson }) {
+
+  const { user } = useUserContext()
+
   const [bg, setBg] = useState({});
-  const generateBgColor = () =>{
+  const [title, setTitle] = useState('')
+
+
+  const generateBgColor = () => {
 
     let r = lesson.subject.name.charCodeAt(0);
     let g = lesson.subject.name.charCodeAt(1);
     let b = lesson.subject.name.charCodeAt(2);
 
-    if(r<100 || g<100 || b<100){
-      r+=100;
-      g+=100;
-      b+=100;
-      if(r>255){
+    if (r < 100 || g < 100 || b < 100) {
+      r += 100;
+      g += 100;
+      b += 100;
+      if (r > 255) {
         r = 255;
       }
-      if(g>255){
+      if (g > 255) {
         g = 255;
       }
-      if(b>255){
+      if (b > 255) {
         b = 255;
       }
     }
 
     let bgColor = `rgb(${r},${g},${b})`;
-    setBg({backgroundColor: bgColor});
+    setBg({ backgroundColor: bgColor });
   }
 
+  const getTitle = () => {
+    if (user.role === Role.student) {
+      setTitle(`${lesson.group.name}\n${lesson.subject.name}\n${lesson.room}\n${lesson.teacher.firstName} ${lesson.teacher.lastName}`)
+    } else {
+      setTitle(`${lesson.group.name}\n${lesson.subject.name}\n${lesson.room}`)
+    }
+  }
 
   useEffect(() => {
-    if(lesson !== undefined){
+    if (lesson !== undefined) {
       generateBgColor();
+      getTitle()
     }
   }, [lesson]);
+
   return (lesson === undefined ? <td></td> :
-    <td className='lesson-info' title={`${lesson.group.name}\n${lesson.subject.name}\n${lesson.room}\n${lesson.teacher.firstName} ${lesson.teacher.lastName}`} style={bg}>
+    <td className='lesson-info' title={title} style={bg}>
       <span className='lesson-room'>{lesson.room}</span>
-      {lesson.subject.name.slice(0,3).toUpperCase()}
-      <span className='lesson-teacher'>{lesson.teacher.firstName.slice(0,1)+lesson.teacher.lastName.slice(0,1)}</span>
+      {lesson.subject.name.slice(0, 3).toUpperCase()}
+      {user.role === Role.student ?
+        <span className='lesson-teacher'>{lesson.teacher.firstName.slice(0, 1) + lesson.teacher.lastName.slice(0, 1)}</span>
+        :
+        <span className='lesson-teacher'>{lesson.group.name}</span>
+      }
     </td>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { GetLessonsOfStudentAPI } from '../../api/LessonAPI'
 import { GetSubjectAPI, GetSubjectsOfStudentAPI } from '../../api/SubjectAPI'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import NavbarClient from '../NavbarClient';
 
 function Curriculum() {
@@ -11,11 +11,15 @@ function Curriculum() {
   const [subjects, setSubjects] = useState([])
 
   const getSubjects = () => {
-    GetSubjectsOfStudentAPI(user.id, user.token).then((response) => {
-      if (response !== null) {
-        setSubjects(response.subjects)
-      }
-    })
+    if (user.role === Role.student) {
+      GetSubjectsOfStudentAPI(user.id, user.token).then((response) => {
+        if (response !== null) {
+          setSubjects(response.subjects)
+        }
+      })
+    } else if (user.role === Role.teacher) {
+      // GetSubjectsOfTe
+    }
   }
 
   useEffect(() => {

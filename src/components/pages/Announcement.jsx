@@ -16,7 +16,7 @@ function Announcement() {
     GetAnnouncesAPI(user.token).then((response) => {
       if (response !== null) {
         response.announces.forEach((announce) => {
-          announce.publishDate = format(announce.publishDate, "yyyy-MM-dd HH:mm")
+          announce.publishDate = format(announce.publishDate, "YYYY-MM-DD HH:mm")
         })
         setAnnounces(response.announces)
       }
@@ -86,15 +86,16 @@ function AnnounceView({ details, userEmail, updateAnnounce }) {
       </form>
       :
       <div>
+        {details.author.id === user.id ?
+          <button onClick={(e) => setEditMode(!editMode)}>edit</button> : <></>
+        }
         <div>{details.author.firstName} {details.author.lastName}</div>
         <div>{details.author.email}</div>
         <div>{details.title}</div>
         <div>{details.text}</div>
         <div>{details.publishDate}</div>
       </div>}
-      {details.author.id === user.id ?
-        <button onClick={(e) => setEditMode(!editMode)}>edit</button> : <></>
-      } <hr />
+      <hr />
     </>
   )
 }
