@@ -43,7 +43,7 @@ function Timetable() {
         <button onClick={() => setWeek(week - 1)}><i className="fa-solid fa-arrow-left"></i></button>
         <button onClick={() => setWeek(week + 1)}><i className="fa-solid fa-arrow-right"></i></button>
       </div>
-      <h2>{user.firstName + ' ' + user.lastName + ' - Week ' + week}</h2>
+      <h2>{user.group+' '+user.firstName + ' ' + user.lastName + ' - Week ' + week}</h2>
       <div className="table-container">
         <table>
           <thead>
