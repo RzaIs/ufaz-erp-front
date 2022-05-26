@@ -6,10 +6,11 @@
         justify-content: space-around;
         margin: 20px;
         .announce-list{
-            max-height: 640px;
+            max-height: 580px;
             width: 70%;
             padding: 10px;
             border-radius: 10px;
+            overflow-y: scroll;
             .announce-info{
                 position: relative;
                 margin-bottom: 30px;

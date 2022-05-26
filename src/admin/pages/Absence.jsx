@@ -4,6 +4,7 @@ import { AddAbsenceAPI, DeleteAbsenceAPI, GetAbsenceOfLessonAPI } from '../../ap
 import { GetLessonsAPI } from '../../api/LessonAPI'
 import { GetStudentOfLesson } from '../../api/StudentAPI'
 import { Role, useUserContext } from '../../context/UserContext'
+import Navbar from '../Navbar'
 
 export default function Absence() {
 
@@ -24,6 +25,7 @@ export default function Absence() {
 
   return (user.logged ? user.role === Role.admin ?
     <div>
+      <Navbar />
       {lessons.map((lesson) =>
         <div key={lesson.lessonId}>
           <div>{lesson.subject.name}</div>
