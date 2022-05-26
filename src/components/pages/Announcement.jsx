@@ -69,7 +69,7 @@ function Announcement() {
           <h3>Add Announcement</h3>
           <form onSubmit={addAnnounce}>
             <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter Title" />
-            <textarea name="text" value={text} nChange={(e) => setText(e.target.value)} placeholder="Enter Announcement Text"></textarea>
+            <textarea name="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Announcement Text"></textarea>
             <input type="submit" value="Add" className='add-btn' />
           </form>
         </div>
