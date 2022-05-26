@@ -63,7 +63,7 @@
                 width: 80%;
                 border-collapse: collapse;
                 border-radius: 10px;
-                height: 500px;
+                max-height: 500px;
                 overflow-y: scroll;
                 th {
                     position: -webkit-sticky; // this is for all Safari (Desktop & iOS), not for Chrome
