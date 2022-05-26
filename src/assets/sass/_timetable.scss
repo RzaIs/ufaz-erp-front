@@ -41,10 +41,27 @@
             th{
                 padding: 30px 30px;
                 text-align: center;
+                font-size: 18px;
             }
             td{
                 text-align: center;
+                font-size: 30px;
             }
         }
+    }
+}
+.lesson-info{
+    position: relative;
+    span{
+        font-size: 10px;
+        font-weight: bolder;
+        position: absolute;
+        bottom: 5%;
+    }
+    .lesson-room{
+        left: 5%;
+    }
+    .lesson-teacher{
+        right: 5%;
     }
 }
