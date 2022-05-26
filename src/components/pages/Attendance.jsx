@@ -4,17 +4,18 @@ import { GetStudentOfLesson } from '../../api/StudentAPI'
 import { GetAbsenceOfStudentAPI, GetAbsenceOfLessonAPI, DeleteAbsenceAPI, AddAbsenceAPI } from '../../api/AbsenceAPI'
 import { GetLessonsOfTeacherAPI } from '../../api/LessonAPI'
 import { Role, useUserContext } from '../../context/UserContext'
+import NavbarClient from '../NavbarClient';
 
 function Attendance() {
 
   const { user } = useUserContext()
 
   return (user.logged ? (
-      user.role === Role.student ?
-        <StudentAttendance /> : 
+    user.role === Role.student ?
+      <StudentAttendance /> :
       user.role === Role.teacher ?
         <TeacherAttendance /> : <Navigate replace to='/admin/absences' />
-    ) : <Navigate replace to='/login' />
+  ) : <Navigate replace to='/login' />
   )
 }
 
@@ -151,7 +152,7 @@ function StudentAttendance() {
   const [absences, setAbsences] = useState([])
 
   const getAbsences = () => {
-    GetAbsenceOfStudentAPI(user.id , user.token).then((response) => {
+    GetAbsenceOfStudentAPI(user.id, user.token).then((response) => {
       if (response !== null) {
         setAbsences(response.absences)
       }
@@ -161,17 +162,21 @@ function StudentAttendance() {
   useEffect(getAbsences, [user])
 
   return (
-    <div>
-      {absences.map(abs =>
-        <div key={abs.id} >
-          <div>week: {abs.lesson.week}</div>
-          <div>day: {weekDay(abs.lesson.day)}</div>
-          <div>{`lesson: ${abs.lesson.period + 1}`}</div>
-          <div>{abs.lesson.subject.name}</div>
-          <div>{abs.lesson.teacher.firstName} {abs.lesson.teacher.lastName}</div>
-          <br />
-        </div>
-      )}
+    <div className='attendance'>
+      <NavbarClient />
+      <div className="absences">
+        {absences.map(abs =>
+          <div key={abs.id} className='absence' >
+            <div><span>Week :</span> {abs.lesson.week}</div>
+            <div><span>Day :</span> {weekDay(abs.lesson.day)}</div>
+            {/* <div>{`lesson: ${abs.lesson.period + 1}`}</div> */}
+            <div><span>Lesson :</span> {abs.lesson.period + 1}</div>
+            <div><span>Subject :</span> {abs.lesson.subject.name}</div>
+            <div><span>Professor :</span> {abs.lesson.teacher.firstName} {abs.lesson.teacher.lastName}</div>
+            <br />
+          </div>
+        )}
+      </div>
     </div>
   )
 }
