@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { format } from 'date-fns'
-import { GetAnnouncesAPI } from '../../api/AnnounceAPI'
+import { DeleteAnnounceAPI, GetAnnouncesAPI } from '../../api/AnnounceAPI'
 import { Role, useUserContext } from '../../context/UserContext'
 import { AddAnnounceAPI, UpdateAnnounceAPI } from '../../api/AnnounceAPI'
 import NavbarClient from '../NavbarClient'
@@ -38,6 +38,13 @@ function Announcement() {
     })
   }
 
+  const deleteAnnounce = (id) => {
+    let confirmed = window.confirm("Are you sure you want to delete this announcement?")
+    if (!confirmed) return
+
+    DeleteAnnounceAPI(id, user.token).then(getAnnounces)
+  }
+
   const updateAnnounce = (e) => {
     e.preventDefault()
     let confirmed = window.confirm("Are you sure you want to make changes to this announcement?")
@@ -62,6 +69,7 @@ function Announcement() {
               key={announce.id}
               details={announce}
               updateAnnounce={updateAnnounce}
+              deleteAnnounce={deleteAnnounce}
             />
           )}
         </div>
@@ -78,7 +86,7 @@ function Announcement() {
   )
 }
 
-function AnnounceView({ details, userEmail, updateAnnounce }) {
+function AnnounceView({ details, updateAnnounce, deleteAnnounce }) {
 
   const { user } = useUserContext()
 
@@ -103,7 +111,7 @@ function AnnounceView({ details, userEmail, updateAnnounce }) {
         {details.author.id === user.id ?
           <>
             <button className='edit-btn' onClick={(e) => setEditMode(!editMode)}>Edit</button>
-            <button className='delete-btn'>Delete</button>
+            <button className='delete-btn' onClick={() => deleteAnnounce(details.id)}>Delete</button>
           </> : <></>
         }
         <p className='date'>{details.publishDate}</p>

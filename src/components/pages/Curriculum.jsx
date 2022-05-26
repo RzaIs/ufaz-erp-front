@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom';
-import { GetLessonsOfStudentAPI } from '../../api/LessonAPI'
-import { GetSubjectAPI, GetSubjectsOfStudentAPI } from '../../api/SubjectAPI'
+import { GetSubjectsOfStudentAPI, GetSubjectsOfTeacherAPI } from '../../api/SubjectAPI'
 import { Role, useUserContext } from '../../context/UserContext'
 import NavbarClient from '../NavbarClient';
 
@@ -19,7 +18,9 @@ function Curriculum() {
         }
       })
     } else if (user.role === Role.teacher) {
-      // GetSubjectsOfTe
+      GetSubjectsOfTeacherAPI(user.id, user.token).then((response) => {
+        setSubjects(response.subjects)
+      })
     }
   }
 
