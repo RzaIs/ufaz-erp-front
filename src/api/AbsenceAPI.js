@@ -1,9 +1,8 @@
 import Axios from "./Axios"
-import { STUDENT_URL } from "./StudentAPI"
 
 const ABSENCE_URL = 'api/absences'
 
-export const GetAbsenceAPI = async (token) => {
+export const GetAbsencesAPI = async (token) => {
 
   let result = null
 
@@ -40,11 +39,11 @@ export const AddAbsenceAPI = async (details, token) => {
   return result
 }
 
-export const GetAbsenceOfStudentAPI = async (token) => {
+export const GetAbsenceOfStudentAPI = async (id, token) => {
 
   let result = null
 
-  await Axios.get(STUDENT_URL + '/absences', {
+  await Axios.get(ABSENCE_URL + '/by/student/' + id, {
     headers: {
       'Authorization': 'Bearer ' + token
     }
@@ -62,6 +61,23 @@ export const GetAbsenceOfLessonAPI = async (id, token) => {
   let result = null
 
   await Axios.get(ABSENCE_URL + '/lesson/' + id, {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+    result = response.data
+  }).catch((error) => {
+    console.log(error)
+  })
+
+  return result
+}
+
+export const DeleteAbsenceAPI = async (id, token) => {
+
+  let result = null
+
+  await Axios.delete(ABSENCE_URL + '/' + id, {
     headers: {
       'Authorization': 'Bearer ' + token
     }

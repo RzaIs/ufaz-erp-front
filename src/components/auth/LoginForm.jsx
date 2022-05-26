@@ -7,10 +7,9 @@ function LoginForm({ login }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    login({ email, password }).then((response) => {
-      setPassword("")
-      if (!response) {
+    setPassword("")
+    login({ email, password }).then((result) => {
+      if (!result) {
         setError("username and password do not match!")
       }
     })

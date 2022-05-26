@@ -9,17 +9,21 @@ function Attendance() {
   const [absences, setAbsences] = useState([])
 
   const getAbsences = () => {
-    GetAbsenceOfStudentAPI(user.token).then((response) => {
+    GetAbsenceOfStudentAPI(user.id , user.token).then((response) => {
       if (response !== null) {
         setAbsences(response.absences)
       }
     })
   }
 
-  useEffect(getAbsences, [user.token])
+  useEffect(getAbsences, [user])
 
   return (
-    <div>{JSON.stringify(absences)}</div>
+    <div>
+      {absences.map(abs =>
+        <div>{JSON.stringify(abs)}</div>
+      )}
+    </div>
   )
 }
 

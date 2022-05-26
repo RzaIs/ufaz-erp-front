@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import { AddSubjectAPI, GetSubjectsAPI, DeleteSubjectAPI, UpdateSubjectAPI } from '../../api/SubjectAPI'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import Navbar from '../Navbar'
 
 function Subject() {
@@ -56,9 +56,9 @@ function Subject() {
     }, user.token).then(getSubjects)
   }
 
-  useEffect(getSubjects, [user.token])
+  useEffect(getSubjects, [user])
 
-  return (user.logged ?
+  return (user.logged ? user.role === Role.admin ?
     <div className='admin-subject'>
       {/* <nav>
         <div className="title">
@@ -140,7 +140,7 @@ function Subject() {
           </form>
         </div>
       </div>
-    </div> : <Navigate replace to='/login' />
+    </div> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
   )
 }
 
