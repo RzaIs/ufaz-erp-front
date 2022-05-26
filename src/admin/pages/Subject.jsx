@@ -104,14 +104,12 @@ function Subject() {
         </div>
 
         <div className="form-container">
+          <h3>Add Subject</h3>
           <form onSubmit={addSubject}>
-            <label htmlFor="name">Subject Name </label> <br />
-            <input type='text' name='name' value={subjectName} onChange={(e) => setSubjectName(e.target.value)} className="inp-subject-name" /> <br />
-            <label htmlFor="credits">Credits </label> <br />
-            <input type='number' name='credits' value={subjectCredits} onChange={(e) => setSubjectCredits(e.target.value)} className='inp-number' /> <br />
-            <label htmlFor="nbOfLessons">Number of Lessons </label> <br />
-            <input type='number' name='nbOfLessons' value={subjectNbOfLessons} onChange={(e) => setSubjectNbOfLessons(e.target.value)} className='inp-number' /> <br />
-            <input type='submit' value='add subject' className='add-btn' />
+            <input type='text' name='name' value={subjectName} onChange={(e) => setSubjectName(e.target.value)} placeholder="Name" className="inp-subject-name" /> <br />
+            <input type='number' name='credits' value={subjectCredits} onChange={(e) => setSubjectCredits(e.target.value)} placeholder="Credits" className='inp-number' /> <br />
+            <input type='number' name='nbOfLessons' value={subjectNbOfLessons} onChange={(e) => setSubjectNbOfLessons(e.target.value)} placeholder="Number of Lessons" className='inp-number' /> <br />
+            <input type='submit' value='add' className='add-btn' />
           </form>
         </div>
       </div>
