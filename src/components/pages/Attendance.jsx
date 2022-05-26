@@ -36,18 +36,21 @@ function TeacherAttendance() {
   }, [user])
 
   return (
-    <div>
-      {lessons.map((lesson) =>
-        <div key={lesson.lessonId}>
-          <div>{lesson.subject.name}</div>
-          <div>{weekDay(lesson.day)}</div>
-          <div>{lesson.week}</div>
-          <div>{lesson.group.name}</div>
-          <div>
-            <StudentList lessonId={lesson.lessonId} />
+    <div className='absence'>
+      <NavbarClient />
+      <div className="lessons">
+        {lessons.map((lesson) =>
+          <div key={lesson.lessonId} className='lesson'>
+            <div><span>Subject : </span>{lesson.subject.name}</div>
+            <div><span>Week Day : </span>{weekDay(lesson.day)}</div>
+            <div><span>Week : </span>{lesson.week}</div>
+            <div><span>Group : </span>{lesson.group.name}</div>
+            <div>
+              <StudentList lessonId={lesson.lessonId} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
@@ -123,7 +126,7 @@ function StudentList({ lessonId }) {
 
   return (user.logged ? user.role !== Role.admin ?
     <>
-      <button onClick={() => setVisible(!visible)} >{visible ? "hide" : "show"}</button>
+      <button className='btn display-btn' onClick={() => setVisible(!visible)} >{visible ? "Hide" : "Show"}</button>
       {visible ?
         <div>
           <form onSubmit={updateAbsence} >
@@ -138,7 +141,7 @@ function StudentList({ lessonId }) {
                 <label htmlFor={'std' + student.id}>{student.firstName + ' ' + student.lastName}</label>
               </div>
             )}
-            <input type="submit" value="submit absences" />
+            <input type="submit" value="Submit Absences" className='btn submit-btn' />
           </form>
         </div> : <></>}
     </> : <Navigate replace to='/admin/absences' /> : <Navigate replace to='/login' />
