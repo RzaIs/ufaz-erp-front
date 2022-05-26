@@ -22,7 +22,7 @@ export default function Absence() {
     getLessons()
   }, [user])
 
-  return (
+  return (user.logged ? user.role === Role.admin ?
     <div>
       {lessons.map((lesson) =>
         <div key={lesson.lessonId}>
@@ -36,7 +36,7 @@ export default function Absence() {
           </div>
         </div>
       )}
-    </div>
+    </div> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
   )
 }
 
@@ -109,7 +109,7 @@ function StudentList({ lessonId }) {
     getAbsencesOfLesson()
   }, [user, lessonId])
 
-  return (user.logged ? user.role === Role.admin ?
+  return (
     <>
       <button onClick={() => setVisible(!visible)} >{visible ? "hide" : "show"}</button>
       {visible ?
@@ -129,7 +129,7 @@ function StudentList({ lessonId }) {
             <input type="submit" value="submit absences" />
           </form>
         </div> : <></>}
-    </> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
+    </>
   )
 
 }

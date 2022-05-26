@@ -45,6 +45,7 @@ function Subject() {
 
   const updateSubject = (e) => {
     e.preventDefault()
+    
     let confirmed = window.confirm("Are you sure you want to make changes for this subject?")
     if (!confirmed) return
 
@@ -60,32 +61,6 @@ function Subject() {
 
   return (user.logged ? user.role === Role.admin ?
     <div className='admin-subject'>
-      {/* <nav>
-        <div className="title">
-          <h1>
-            <Link className='link-to' to={'/admin'}>EduPage</Link>
-          </h1>
-        </div>
-        <div className="links-to-pages">
-          <ul>
-            <li>
-              <Link className='active' to={'/admin/subjects'}>Subjects</Link>
-            </li>
-            <li>
-              <Link className='link-to' to={'/admin/lessons'}>Lessons</Link>
-            </li>
-            <li>
-              <Link className='link-to' to={'/admin/groups'}>Groups</Link>
-            </li>
-            <li>
-              <Link className='link-to' to={'/admin/teachers'}>Teachers</Link>
-            </li>
-            <li>
-              <Link className='link-to' to={'/admin/lessons'}>Announces</Link>
-            </li>
-          </ul>
-        </div>
-      </nav> */}
       <Navbar />
       <div className="content">
         <div className="table-container">

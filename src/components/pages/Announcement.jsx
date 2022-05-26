@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 import { format } from 'date-fns'
 import { GetAnnouncesAPI } from '../../api/AnnounceAPI'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import { AddAnnounceAPI, UpdateAnnounceAPI } from '../../api/AnnounceAPI'
 import NavbarClient from '../NavbarClient'
 
@@ -51,16 +52,18 @@ function Announcement() {
 
   useEffect(getAnnounces, [user])
 
-  return (
+  return (user.logged ? user.role !== Role.admin ?
     <div className='announcement'>
       <NavbarClient />
       <div className="content">
         <div className="announce-list">
-          {announces.map((announce) => <AnnounceView
-            key={announce.id}
-            details={announce}
-            updateAnnounce={updateAnnounce}
-          />)}
+          {announces.map((announce) => 
+            <AnnounceView
+              key={announce.id}
+              details={announce}
+              updateAnnounce={updateAnnounce}
+            />
+          )}
         </div>
         <div className="form-container">
           <h3>Add Announcement</h3>
@@ -71,7 +74,7 @@ function Announcement() {
           </form>
         </div>
       </div>
-    </div>
+    </div> :  <Navigate replace to='/admin/announces' /> : <Navigate replace to='/login' />
   )
 }
 

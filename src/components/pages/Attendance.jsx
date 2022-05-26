@@ -9,8 +9,12 @@ function Attendance() {
 
   const { user } = useUserContext()
 
-  return ( user.role === Role.student ?
-    <StudentAttendance /> : <TeacherAttendance />
+  return (user.logged ? (
+      user.role === Role.student ?
+        <StudentAttendance /> : 
+      user.role === Role.teacher ?
+        <TeacherAttendance /> : <Navigate replace to='/admin/absences' />
+    ) : <Navigate replace to='/login' />
   )
 }
 
@@ -116,7 +120,7 @@ function StudentList({ lessonId }) {
     getAbsencesOfLesson()
   }, [user, lessonId])
 
-  return (user.logged ?
+  return (user.logged ? user.role !== Role.admin ?
     <>
       <button onClick={() => setVisible(!visible)} >{visible ? "hide" : "show"}</button>
       {visible ?
@@ -136,7 +140,7 @@ function StudentList({ lessonId }) {
             <input type="submit" value="submit absences" />
           </form>
         </div> : <></>}
-    </> : <Navigate replace to='/login' />
+    </> : <Navigate replace to='/admin/absences' /> : <Navigate replace to='/login' />
   )
 }
 

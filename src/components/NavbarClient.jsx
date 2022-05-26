@@ -18,7 +18,7 @@ const NavbarClient = (props) => {
     <nav className='nav-client'>
         <div className="title">
           <h1>
-            <NavLink className='link-to' to={'/admin'}>UFAZ EDUPAGE</NavLink>
+            <NavLink className='link-to' to={'/'}>UFAZ EDUPAGE</NavLink>
           </h1>
         </div>
         <div className="links-to-pages">

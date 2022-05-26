@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom';
 import { GetLessonsOfStudentAPI } from '../../api/LessonAPI'
 import { GetSubjectAPI, GetSubjectsOfStudentAPI } from '../../api/SubjectAPI'
 import { Role, useUserContext } from '../../context/UserContext'
@@ -26,7 +27,7 @@ function Curriculum() {
     getSubjects()
   }, [user])
 
-  return (
+  return (user.logged ? user.role !== Role.admin ?
     <div className='info curriculum'>
       <NavbarClient />
       <div className="table-container">
@@ -49,7 +50,7 @@ function Curriculum() {
           </tbody>
         </table>
       </div>
-    </div>
+    </div> : <Navigate replace to='/admin/subjects' /> : <Navigate replace to='/login' />
   )
 }
 

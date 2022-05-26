@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom'
 import { GetLessonsOfStudentAPI, GetLessonsOfTeacherAPI } from '../../api/LessonAPI';
 import { Role, useUserContext } from '../../context/UserContext';
 import NavbarClient from '../NavbarClient';
@@ -43,7 +44,7 @@ function Timetable() {
     setWeekLessons(lessons.filter(lesson => lesson.week === week))
   }, [week, lessons])
 
-  return (
+  return (user.logged ? user.role !== Role.admin ?
     <div className='timetable'>
       <NavbarClient />
       <div className="week-btns">
@@ -107,7 +108,7 @@ function Timetable() {
           </tbody>
         </table>
       </div>
-    </div>
+    </div> : <Navigate replace to='/admin/lessons' /> : <Navigate replace to='/login' />
   )
 }
 
