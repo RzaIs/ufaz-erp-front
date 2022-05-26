@@ -98,9 +98,9 @@ function Teacher() {
           <table>
             <thead>
               <tr>
-                <th>email</th>
-                <th>first name</th>
-                <th>last name</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th></th>
                 <th></th>
               </tr>
