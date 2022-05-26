@@ -39,7 +39,7 @@ function Login() {
           firstName: response.user.firstName,
           lastName: response.user.lastName,
           token: response.jwt,
-          group: 'group',
+          group: role === Role.student ? response.user.group.name : '',
           role: role
         })
         setRedirect(true)

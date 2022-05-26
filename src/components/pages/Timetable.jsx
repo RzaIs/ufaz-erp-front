@@ -107,9 +107,6 @@ function Timetable() {
 function LessonBox({ lesson }) {
   const [bg, setBg] = useState({});
   const generateBgColor = () =>{
-    // let r = Math.floor(Math.random() * 256);
-    // let g = Math.floor(Math.random() * 256);
-    // let b = Math.floor(Math.random() * 256);
 
     let r = lesson.subject.name.charCodeAt(0);
     let g = lesson.subject.name.charCodeAt(1);
@@ -131,17 +128,15 @@ function LessonBox({ lesson }) {
     }
 
     let bgColor = `rgb(${r},${g},${b})`;
-    console.log(bgColor);
     setBg({backgroundColor: bgColor});
   }
 
 
-  useEffect(()=>{
-
+  useEffect(() => {
     if(lesson !== undefined){
       generateBgColor();
     }
-  },[lesson]);
+  }, [lesson]);
   return (lesson === undefined ? <td></td> :
     <td className='lesson-info' title={`${lesson.group.name}\n${lesson.subject.name}\n${lesson.room}\n${lesson.teacher.firstName} ${lesson.teacher.lastName}`} style={bg}>
       <span className='lesson-room'>{lesson.room}</span>
