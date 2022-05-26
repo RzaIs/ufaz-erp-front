@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 import { format } from 'date-fns'
 import { GetAnnouncesAPI } from '../../api/AnnounceAPI'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import { AddAnnounceAPI, UpdateAnnounceAPI } from '../../api/AnnounceAPI'
 
 function Announcement() {
@@ -50,20 +51,22 @@ function Announcement() {
 
   useEffect(getAnnounces, [user])
 
-  return (
+  return (user.logged ? user.role !== Role.admin ?
     <div>
-      {announces.map((announce) => <AnnounceView
-        key={announce.id}
-        details={announce}
-        updateAnnounce={updateAnnounce}
-      />)}
+      {announces.map((announce) => 
+        <AnnounceView
+          key={announce.id}
+          details={announce}
+          updateAnnounce={updateAnnounce}
+        />
+      )}
       <h3>Add Announcement</h3>
       <form onSubmit={addAnnounce}>
         <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <input type="text" name="text" value={text} onChange={(e) => setText(e.target.value)} />
         <input type="submit" value="add Announcement" />
       </form>
-    </div>
+    </div> :  <Navigate replace to='/admin/announces' /> : <Navigate replace to='/login' />
   )
 }
 

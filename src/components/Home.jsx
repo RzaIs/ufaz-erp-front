@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
-import { useUserContext } from "../context/UserContext";
+import { Role, useUserContext } from "../context/UserContext";
 import image from '../assets/img/max1920x1920trslide24.jpg'
 import NavbarClient from "./NavbarClient";
 
@@ -9,7 +9,7 @@ function Home() {
 
   const { user } = useUserContext()
 
-  return (user.logged ?
+  return (user.logged ? user.role !== Role.admin ?
     <div>
       <NavbarClient display="unvisible" />
       <main>
@@ -23,7 +23,7 @@ function Home() {
             <Link to={'/announcements'} className='link-to'><button className="announcement-btn"><i className="fa-solid fa-envelope"></i> Announcement</button></Link>
         </section>
       </main>
-    </div> : <Navigate replace to='/login' />
+    </div> : <Navigate replace to='/admin' /> : <Navigate replace to='/login' />
   )
 }
 
