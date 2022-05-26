@@ -127,9 +127,9 @@ function LessonBox({ lesson }) {
     let b = lesson.subject.name.charCodeAt(2);
 
     if (r < 100 || g < 100 || b < 100) {
-      r += 100;
-      g += 100;
-      b += 100;
+      r += 60;
+      g += 60;
+      b += 60;
       if (r > 255) {
         r = 255;
       }
