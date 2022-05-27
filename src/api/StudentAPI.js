@@ -1,18 +1,19 @@
 import Axios from "./Axios"
+import { LESSON_URL } from "./LessonAPI"
 
-export const TEACHER_URL = 'api/teachers'
+export const STUDENT_URL = 'api/students'
 
-export const GetTeachersAPI = async (token) => {
+export const GetStudentsAPI = async (token) => {
 
   let result = null
 
-  await Axios.get(TEACHER_URL, {
+  await Axios.get(STUDENT_URL, {
     headers: {
       'Authorization': 'Bearer ' + token
     }
   }).then((response) => {
     result = response.data
-    result.teachers.sort((a, b) => {
+    result.students.sort((a, b) => {
       return a.id - b.id
     })
   }).catch((error) => {
@@ -22,15 +23,37 @@ export const GetTeachersAPI = async (token) => {
   return result
 }
 
-export const AddTeacherAPI = async (details, token) => {
-  
+export const GetStudentOfLesson = async (id, token) => {
+
   let result = null
 
-  await Axios.post(TEACHER_URL, {
+  await Axios.get(LESSON_URL + '/' + id + '/students', {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+    result = response.data
+    result.students.sort((a, b) => {
+      return a.id - b.id
+    })
+  }).catch((error) => {
+    console.log(error)
+  })
+
+  return result
+}
+
+export const AddStudentAPI = async (details, token) => {
+
+  let result = null
+
+  await Axios.post(STUDENT_URL, {
     email: details.email,
     password: details.password,
     firstName: details.firstName,
-    lastName: details.lastName
+    lastName: details.lastName,
+    groupId: details.groupId,
+    admissionYear: details.admissionYear
   }, {
     headers: {
       'Authorization': 'Bearer ' + token
@@ -44,11 +67,11 @@ export const AddTeacherAPI = async (details, token) => {
   return result
 }
 
-export const DeleteTeacherAPI = async (id, token) => {
+export const DeleteStudentAPI = async (id, token) => {
 
   let result = null
 
-  await Axios.delete(TEACHER_URL + '/' + id, {
+  await Axios.delete(STUDENT_URL + '/' + id, {
     headers: {
       'Authorization': 'Bearer ' + token
     }
@@ -61,15 +84,16 @@ export const DeleteTeacherAPI = async (id, token) => {
   return result
 }
 
-export const UpdateTeacherAPI = async (details, token) => {
+export const UpdateStudentAPI = async (details, token) => {
 
   let result = null
 
-  await Axios.put(TEACHER_URL + '/' + details.id, {
+  await Axios.put(STUDENT_URL + '/' + details.id, {
     email: details.email,
     password: details.password,
     firstName: details.firstName,
-    lastName: details.lastName
+    lastName: details.lastName,
+    groupId: details.groupId
   }, {
     headers: {
       'Authorization': 'Bearer ' + token

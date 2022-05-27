@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import { Navigate } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import LoginAPI from '../../api/LoginAPI'
@@ -13,15 +13,41 @@ function Login() {
 
   const login = async (details) => {
 
-    const response = await LoginAPI(details)
+    let result = false
 
-    if (response === null) {
-      return false
-    } else {
-      setUser({ logged: true, email: details.email, token: response.jwt })
-      setRedirect(true)
-      return true
-    }
+    await LoginAPI(details).then((response) => {
+      if (response !== null) {
+        let role
+        switch (response.user.role) {
+          case "ROLE_ADMIN":
+            role = Role.admin
+            break;
+          case "ROLE_STUDENT":
+            role = Role.student
+            break;
+          case "ROLE_TEACHER":
+            role = Role.teacher
+            break;
+          default:
+            role = -1
+            break;
+        }
+        setUser({
+          logged: true,
+          id: response.user.id,
+          email: response.user.email,
+          firstName: response.user.firstName,
+          lastName: response.user.lastName,
+          token: response.jwt,
+          group: role === Role.student ? response.user.group.name : '',
+          role: role
+        })
+        setRedirect(true)
+        result = true
+      }
+    })
+
+    return result
   }
 
   const logout = () => {
@@ -31,11 +57,14 @@ function Login() {
     clearUser()
   }
 
-  return (redirect ? <Navigate replace to='/' /> :
+  return (redirect ? (
+      user.role === Role.admin ?
+      <Navigate replace to='/admin' /> : <Navigate replace to='/' />
+    ) :
     <div className="login-body">
       {user.logged ? (
         <div className='container'>
-          <h2>Welcome <span>{user.email}</span></h2>
+          <h2>Welcome <span>{user.firstName} {user.lastName}</span></h2>
           <button className='submit-btn' onClick={logout}>Logout</button>
         </div>
       ) : (

@@ -1,4 +1,6 @@
 import Axios from "./Axios"
+import { STUDENT_URL } from "./StudentAPI"
+import { TEACHER_URL } from "./TeacherAPI"
 
 const SUBJECT_URL = 'api/subjects'
 
@@ -24,6 +26,7 @@ export const AddSubjectAPI = async (details, token) => {
 }
 
 export const GetSubjectsAPI = async (token) => {
+  
   let result = null
 
   await Axios.get(SUBJECT_URL, {
@@ -42,7 +45,65 @@ export const GetSubjectsAPI = async (token) => {
   return result
 }
 
+export const GetSubjectAPI = async (id, token) => {
+
+  let result = null
+
+  await Axios.get(SUBJECT_URL + '/' + id, {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+    result = response.data
+  }).catch((error) => {
+    console.log(error)
+  })
+
+  return result
+}
+
+export const GetSubjectsOfStudentAPI = async (id, token) => {
+
+  let result = null
+
+  await Axios.get(STUDENT_URL + '/' + id + '/subjects', {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+    result = response.data
+    result.subjects.sort((a, b) => {
+      return a.id - b.id
+    })
+  }).catch((error) => {
+    console.log(error)
+  })
+
+  return result
+}
+
+export const GetSubjectsOfTeacherAPI = async (id, token) => {
+
+  let result = null
+
+  await Axios.get(TEACHER_URL + '/' + id + '/subjects', {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+    result = response.data
+    result.subjects.sort((a, b) => {
+      return a.id - b.id
+    })
+  }).catch((error) => {
+    console.log(error)
+  })
+
+  return result
+}
+
 export const DeleteSubjectAPI = async (id, token) => {
+  
   let result = null
 
   await Axios.delete(SUBJECT_URL + '/' + id, {
@@ -59,6 +120,7 @@ export const DeleteSubjectAPI = async (id, token) => {
 }
 
 export const UpdateSubjectAPI = async (details, token) => {
+  
   let result = null
 
   await Axios.put(SUBJECT_URL + '/' + details.id, {

@@ -1,0 +1,67 @@
+.timetable{
+    .week-btns{
+        width: 7%;
+        display: flex;
+        justify-content: space-between;
+        margin: 20px auto;
+        button{
+            font-size: 20px;
+            padding: 8px 15px;
+            background: transparent;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            color: rgb(18, 203, 18);
+            &:hover{
+                background: #E6F1FC;
+            }
+        }
+    }
+    h2{
+        font-size: 35px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .table-container{
+        table,th,td{
+            border-collapse: collapse;
+            border: 3px solid #000;
+            cursor: default;
+        }
+        table{
+            margin: 0 auto;
+        }
+        thead{
+            th{
+                padding: 30px 30px;
+                text-align: center;
+            }
+        }
+        tbody{
+            th{
+                padding: 30px 30px;
+                text-align: center;
+                font-size: 18px;
+            }
+            td{
+                text-align: center;
+                font-size: 30px;
+            }
+        }
+    }
+}
+.lesson-info{
+    position: relative;
+    span{
+        font-size: 10px;
+        font-weight: bolder;
+        position: absolute;
+        bottom: 5%;
+    }
+    .lesson-room{
+        left: 5%;
+    }
+    .lesson-teacher{
+        right: 5%;
+    }
+}

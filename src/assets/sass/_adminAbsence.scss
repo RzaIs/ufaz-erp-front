@@ -1,0 +1,52 @@
+.absence{
+    height: 100vh;
+    background: #d8d9eb;
+    .lessons{
+        width:80%;
+        //background: red;
+        margin: 20px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-height: 620px;
+        overflow-y: scroll;
+        .lesson{
+            width: 45%;
+            background: #fff;
+            margin: 10px 0;
+            max-height: 190px;
+            overflow-y: scroll;
+            padding: 10px;
+            border-radius: 10px;
+            div{
+                font-size: 18px;
+                margin: 5px 0;
+                span{
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    .btn{
+        cursor: pointer;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        padding: 5px 13px;
+        border-radius: 5px;
+        transition: .3s;
+    }
+    .display-btn{
+        background: orange;
+        &:hover{
+            background: rgb(180, 118, 3);
+        }
+    }
+    .submit-btn{
+        background: #5173ed;
+        &:hover{
+            background: #0f33b2;
+        }
+    }
+}

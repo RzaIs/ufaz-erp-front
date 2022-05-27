@@ -1,0 +1,28 @@
+.attendance{
+    height: 100vh;
+    background: #d8d9eb;
+    .absences{
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-height: 500px;
+        overflow-y: scroll;
+        .absence{
+            width: 22%;
+            background: #fff;
+            border-radius: 10px;
+            max-height: 175px;
+            margin: 30px 0;
+            div{
+                text-align: center;
+                margin: 10px 0;
+                text-transform: capitalize;
+                span{
+                    font-weight: bold;
+                }
+            }
+
+        }
+    }
+}

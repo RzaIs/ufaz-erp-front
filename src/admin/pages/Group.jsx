@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
-import { useUserContext } from '../../context/UserContext'
+import { Role, useUserContext } from '../../context/UserContext'
 import { AddGroupAPI, DeleteGroupAPI, GetGroupsAPI, UpdateGroupAPI } from '../../api/GroupAPI'
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 import Popup from 'reactjs-popup'
 
 function Group() {
@@ -23,7 +23,7 @@ function Group() {
   const addGroup = (e) => {
     e.preventDefault()
 
-    AddGroupAPI({ name: name }, user.token).then((response) => {
+    AddGroupAPI({ name: name }, user.token).then((r) => {
       getGroups()
       setName("")
     })
@@ -47,9 +47,9 @@ function Group() {
     }, user.token).then(getGroups)
   }
 
-  useEffect(getGroups, [user.token])
+  useEffect(getGroups, [user])
 
-  return (user.logged ?
+  return (user.logged ? user.role === Role.admin ?
     <div className='admin-group'>
       <Navbar />
       <div className="groups-content">
@@ -93,7 +93,7 @@ function Group() {
           </table>
         </div>
       </div>
-    </div> : <Navigate replace to='/login' />
+    </div> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
   )
 }
 

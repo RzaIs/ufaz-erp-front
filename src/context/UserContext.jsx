@@ -2,10 +2,21 @@ import React, { useState, createContext, useContext } from 'react'
 
 const userContext = createContext()
 
+export const Role = {
+  admin : 1,
+  teacher : 2,
+  student : 3
+} 
+
 const defaultUserSate = {
   logged: false,
+  id: 0,
   email: "",
+  firstName: "",
+  lastName: "",
   token: "",
+  group: "",
+  role: null
 }
 
 function UserContextProvider({ children }) {

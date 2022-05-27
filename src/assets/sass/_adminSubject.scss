@@ -1,76 +1,31 @@
 .admin-subject{
     background: #d8d9e5;
     height: 100vh;
-    nav{
-        background: #5173ed;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 20px 0;
-        .title{
-            width: 30%;
-            h1{
-                font-size: 35px;
-                .link-to{
-                    font-family: cursive;
-                    color: #fff;
-                }
-            }
-        }
-        .links-to-pages{
-            width: 60%;
-            ul{
-                display: flex;
-                justify-content: space-around;
-                list-style: none;
-                align-items: center;
-                li{
-                    font-size: 18px;
-                    .link-to{
-                        color: #171d29;
-                        font-weight: bolder;
-                        transition: .3s;
-                        &:hover{
-                            color: #fff;
-                        }
-                    }
-                }
-            }
-        }
-        .active{
-            color: #fff;
-            font-weight: bold;
-            text-decoration: none;
-        }
-    }
-    .link-to{
-        text-decoration: none;
+    h3{
+        font-size: 24px;
+        text-align: center;
+        color: #5173ed;
     }
     form{
         margin-top: 30px;
-        label{
-            font-size: 20px;
-            color: #171d29;
-        }
         input{
-            margin: 15px 0;
+            display: block;
+            margin: 5px auto;
             padding: 5px 7px;
             outline: none;
             border: none;
             border-radius: 5px;
-        }
-        .inp-subject-name{
-            width: 55%;
-        }
-        .inp-number{
-            width: 10%;
+            width: 60%;
+            border: 2px solid #5173ed;
         }
         .add-btn{
+            border: none;
+            width: 15%;
             font-size: 16px;
             color: #fff;
             text-transform: capitalize;
             background: rgb(2, 184, 2);
-            padding: 5px 15px;
+            padding: 10px 15px;
             cursor: pointer;
             transition: .3s;
             &:hover{
@@ -84,22 +39,37 @@
     .content{
         display: flex;
         justify-content: space-around;
+        margin-top: 30px;
         .table-container{
             width: 60%;
+            height: 600px;
+            overflow: scroll;
+            border-radius: 10px;
         }
         .form-container{
             width: 35%;
             padding-top: 30px;
+            background: #fff;
+            height: 320px;
+            border-radius: 10px;
         }
     }
     table{
         background: #fff;
-        margin: 50px auto;
         width: 100%;
         border-collapse: collapse;
         border-radius: 10px;
+        max-height: 100%;
         th,td{
             padding: 8px;
+            text-align: center;
+        }
+        th {
+            position: -webkit-sticky; // this is for all Safari (Desktop & iOS), not for Chrome
+            position: sticky;
+            top: 0;
+            z-index: 1; // any positive value, layer order is global
+            // any bg-color to overlap
         }
         .th-top-first{
             border-top-left-radius: 10px;
@@ -110,7 +80,6 @@
         th{
             padding-top: 12px;
             padding-bottom: 12px;
-            text-align: left;
             background-color: #5173ed;
             color: #fff;
         }
@@ -150,6 +119,7 @@
 }
 
 .popup-content {
+    display: block;
     text-align: center;
     margin: auto;
     background: rgb(255, 255, 255);
@@ -163,6 +133,8 @@
         padding: 5px;
     }
     .btn{
+        display: block;
+        margin: 0 auto;
         width: unset;
         padding: 8px 20px;
         color: red;
@@ -175,6 +147,7 @@
         font-weight: bolder;
         border-radius: 10px;
         transition: .3s;
+        margin-bottom: 30px;
         &:hover{
             background: #0f33b2;
         }

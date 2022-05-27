@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import { AddSubjectAPI, GetSubjectsAPI, DeleteSubjectAPI, UpdateSubjectAPI } from '../../api/SubjectAPI'
-import { useUserContext } from '../../context/UserContext'
-import { Link } from 'react-router-dom'
+import { Role, useUserContext } from '../../context/UserContext'
+import Navbar from '../Navbar'
 
 function Subject() {
   const { user } = useUserContext()
@@ -28,7 +28,12 @@ function Subject() {
       name: subjectName,
       credits: subjectCredits,
       nbOfLessons: subjectNbOfLessons
-    }, user.token).then(getSubjects)
+    }, user.token).then((r) => {
+      getSubjects()
+      setSubjectName("")
+      setSubjectCredits(0)
+      setSubjectNbOfLessons(0)
+    })
   }
 
   const deleteSubject = (id) => {
@@ -40,6 +45,7 @@ function Subject() {
 
   const updateSubject = (e) => {
     e.preventDefault()
+    
     let confirmed = window.confirm("Are you sure you want to make changes for this subject?")
     if (!confirmed) return
 
@@ -51,37 +57,11 @@ function Subject() {
     }, user.token).then(getSubjects)
   }
 
-  useEffect(getSubjects, [user.token])
+  useEffect(getSubjects, [user])
 
-  return (user.logged ?
+  return (user.logged ? user.role === Role.admin ?
     <div className='admin-subject'>
-      <nav>
-        <div className="title">
-          <h1>
-            <Link className='link-to' to={'/admin'}>EduPage</Link>
-          </h1>
-        </div>
-        <div className="links-to-pages">
-          <ul>
-            <li>
-              <Link className='active' to={'/admin/subjects'}>Subjects</Link>
-            </li>
-            <li>
-              <Link className='link-to' to={'/admin/lessons'}>Lessons</Link>
-            </li>
-            <li>
-              <Link className='link-to' to={'/admin/groups'}>Groups</Link>
-            </li>
-            <li>
-              <Link className='link-to' to={'/admin/teachers'}>Teachers</Link>
-            </li>
-            <li>
-              <Link className='link-to' to={'/admin/lessons'}>Announces</Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
+      <Navbar />
       <div className="content">
         <div className="table-container">
           <table>
@@ -101,7 +81,7 @@ function Subject() {
                   <td className='td-center'>{subject.credits}</td>
                   <td className='td-center'>{subject.totalNumberOfLessons}</td>
                   <td>
-                    <button onClick={() => deleteSubject(subject.id)} className="delete-btn" title='Delete' ><i className="fa-solid fa-trash-can"></i></button>
+                    <button onClick={() => deleteSubject(subject.id)} title='Delete' className='delete-btn' ><i className="fa-solid fa-trash-can"></i></button>
                   </td>
                   <td>
                     <Popup className='edit-popup' trigger={<button className='edit-btn' title='Edit'><i className="fa-solid fa-pen-to-square"></i></button>} position='right center'>
@@ -124,18 +104,16 @@ function Subject() {
         </div>
 
         <div className="form-container">
+          <h3>Add Subject</h3>
           <form onSubmit={addSubject}>
-            <label htmlFor="name">Subject Name </label> <br />
-            <input type='text' name='name' value={subjectName} onChange={(e) => setSubjectName(e.target.value)} className="inp-subject-name" /> <br />
-            <label htmlFor="credits">Credits </label> <br />
-            <input type='number' name='credits' value={subjectCredits} onChange={(e) => setSubjectCredits(e.target.value)} className='inp-number' /> <br />
-            <label htmlFor="nbOfLessons">Number of Lessons </label> <br />
-            <input type='number' name='nbOfLessons' value={subjectNbOfLessons} onChange={(e) => setSubjectNbOfLessons(e.target.value)} className='inp-number' /> <br />
-            <input type='submit' value='add subject' className='add-btn' />
+            <input type='text' name='name' value={subjectName} onChange={(e) => setSubjectName(e.target.value)} placeholder="Name" className="inp-subject-name" /> <br />
+            <input type='number' name='credits' value={subjectCredits} onChange={(e) => setSubjectCredits(e.target.value)} placeholder="Credits" className='inp-number' /> <br />
+            <input type='number' name='nbOfLessons' value={subjectNbOfLessons} onChange={(e) => setSubjectNbOfLessons(e.target.value)} placeholder="Number of Lessons" className='inp-number' /> <br />
+            <input type='submit' value='add' className='add-btn' />
           </form>
         </div>
       </div>
-    </div> : <Navigate replace to='/login' />
+    </div> : <Navigate replace to='/unauth' /> : <Navigate replace to='/login' />
   )
 }
 

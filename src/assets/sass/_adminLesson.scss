@@ -1,60 +1,145 @@
 .admin-lesson{
-    background: #d8d9eb;
     height: 100vh;
-    h3{
-        text-align: center;
-        margin-top: 30px;
+    background: #d8d9eb;
+    .content{
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        margin-top: 40px;
+        width: 100%;
+        .form-container{
+            background: #fff;
+            width: 25%;
+            padding: 10px;
+            border-radius: 10px;
+            max-height: 400px;
+            h3{
+                font-size: 24px;
+                text-align: center;
+                color: #5173ed;
+                margin-bottom: 30px;
+            }
+            form{
+                input,select{
+                    display: block;
+                    width: 80%;
+                    padding: 5px 10px;
+                    margin: 10px auto;
+                    border: 2px solid #5173ed;
+                    border-radius: 5px;
+                }
+                .add-btn{
+                    font-size: 16px;
+                    width: unset;
+                    text-transform: capitalize;
+                    font-weight: bold;
+                    border: none;
+                    cursor: pointer;
+                    background: rgb(2, 184, 2);
+                    color: #fff;
+                    transition: .3s;
+                    border-radius: 10px;
+                    padding: unset;
+                    padding: 10px 15px;
+                    &:hover{
+                        background: rgb(1, 125, 1);
+                    }
+                }
+            }
+        }
+        .table-container{
+            //background: pink;
+            width: 71%;
+            table{
+                display: block;
+                border-collapse: collapse;
+                width: 80%;
+                border-radius: 10px;
+                max-height: 500px;
+                overflow-y: scroll;
+                th {
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    background-color: #5173ed;
+                    color: #fff;
+                }
+                th,td{
+                    padding: 8px;
+                    text-transform: capitalize;
+                    text-align: center;
+                }
+                th:last-child{
+                    border-top-right-radius: 10px;
+                }
+                td{
+                    width: 30%;
+                }
+                tbody{
+                    tr:last-child{
+                        td:first-child{
+                            border-bottom-left-radius: 10px;
+                        }
+                        td:last-child{
+                            border-bottom-right-radius: 10px;
+                        }
+                    }
+                    tr:nth-child(even){
+                        background: #f2f2f2;
+                    }
+                    tr:nth-child(odd){
+                        background: #fff;
+                    }
+                    tr{
+                        &:hover{
+                            background: #ddd;
+                        }
+                    }
+                }
+                .delete-btn{
+                    font-size: 18px;
+                    color: #fff;
+                    padding: 5px 10px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: .3s;
+                    background: red;
+                    &:hover{
+                        background: rgb(170, 2, 2);
+                    }
+                }
+                .edit-btn{
+                    background: orange;
+                    font-size: 18px;
+                    color: #fff;
+                    padding: 5px 10px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: .3s;
+                     &:hover{
+                        background: rgb(180, 118, 3);
+                    }
+                }
+                .td-teacher{
+                    width: 43%;
+                }
+            }
+        }
     }
-    .add-lesson-form{
-        .top-form{
-            display: flex;
-            justify-content: space-between;
-            width: 60%;
-            margin: 0 auto;
-            select{
-                width: 48%;
-                padding: 5px 10px;
-                border: 2px solid rgb(68, 110, 218);
-                outline: none;
-                margin: 10px 0;
-                border-radius: 5px;
-            }
-        }
-        .mid-form{
-            display: flex;
-            justify-content: space-between;
-            width: 60%;
-            margin: 0 auto;
-            select{
-                width: 30%;
-                padding: 5px 10px;
-                border: 2px solid rgb(68, 110, 218);
-                outline: none;
-                margin: 10px 0;
-                border-radius: 5px;
-            }
-            input{
-                width: 20%;
-                padding: 5px 10px;
-                border: 2px solid rgb(68, 110, 218);
-                outline: none;
-                margin: 10px 0;
-                border-radius: 5px;
-            }
-        }
-        .bot-form{
-            display: flex;
-            justify-content: space-around;
-            width: 60%;
-            margin: 0 auto;
-            input{
-                width: 20%;
-                padding: 5px 10px;
-                border: 2px solid rgb(68, 110, 218);
-                outline: none;
-                margin: 10px 0;
-                border-radius: 5px;
-            }
-        }
+}
+
+.edit-form{
+    input, select{
+        display: block;
+        width: 80%;
+        border: 2px solid #5173ed;
+        margin: 10px auto;
+        padding: 5px 10px;
+        border-radius: 5px;
     }
 }

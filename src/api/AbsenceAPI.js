@@ -1,20 +1,17 @@
 import Axios from "./Axios"
 
-export const TEACHER_URL = 'api/teachers'
+const ABSENCE_URL = 'api/absences'
 
-export const GetTeachersAPI = async (token) => {
+export const GetAbsencesAPI = async (token) => {
 
   let result = null
 
-  await Axios.get(TEACHER_URL, {
+  await Axios.get(ABSENCE_URL, {
     headers: {
       'Authorization': 'Bearer ' + token
     }
   }).then((response) => {
     result = response.data
-    result.teachers.sort((a, b) => {
-      return a.id - b.id
-    })
   }).catch((error) => {
     console.log(error)
   })
@@ -22,15 +19,13 @@ export const GetTeachersAPI = async (token) => {
   return result
 }
 
-export const AddTeacherAPI = async (details, token) => {
-  
+export const AddAbsenceAPI = async (details, token) => {
+
   let result = null
 
-  await Axios.post(TEACHER_URL, {
-    email: details.email,
-    password: details.password,
-    firstName: details.firstName,
-    lastName: details.lastName
+  await Axios.post(ABSENCE_URL, {
+    lessonId: details.lessonId,
+    students: details.students 
   }, {
     headers: {
       'Authorization': 'Bearer ' + token
@@ -44,11 +39,11 @@ export const AddTeacherAPI = async (details, token) => {
   return result
 }
 
-export const DeleteTeacherAPI = async (id, token) => {
+export const GetAbsenceOfStudentAPI = async (id, token) => {
 
   let result = null
 
-  await Axios.delete(TEACHER_URL + '/' + id, {
+  await Axios.get(ABSENCE_URL + '/by/student/' + id, {
     headers: {
       'Authorization': 'Bearer ' + token
     }
@@ -61,16 +56,28 @@ export const DeleteTeacherAPI = async (id, token) => {
   return result
 }
 
-export const UpdateTeacherAPI = async (details, token) => {
+export const GetAbsenceOfLessonAPI = async (id, token) => {
 
   let result = null
 
-  await Axios.put(TEACHER_URL + '/' + details.id, {
-    email: details.email,
-    password: details.password,
-    firstName: details.firstName,
-    lastName: details.lastName
-  }, {
+  await Axios.get(ABSENCE_URL + '/lesson/' + id, {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+    result = response.data
+  }).catch((error) => {
+    console.log(error)
+  })
+
+  return result
+}
+
+export const DeleteAbsenceAPI = async (id, token) => {
+
+  let result = null
+
+  await Axios.delete(ABSENCE_URL + '/' + id, {
     headers: {
       'Authorization': 'Bearer ' + token
     }

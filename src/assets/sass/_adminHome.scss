@@ -1,0 +1,49 @@
+.admin{
+    height: 100vh;
+    .content{
+        display: flex;
+        height: calc(100vh - 116.8px);
+        background: rgb(235, 234, 234);
+        .image{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            img{
+                width: 95%;
+                height: 98%;
+                display: block;
+                margin: auto;
+                border-radius: 10px;
+            }
+        }
+        .links{
+            width: 50%;
+            background: rgb(235, 234, 234);
+            .link-to{
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                button{
+                    display: block;
+                    padding: 20px 35px;
+                    font-size: 24px;
+                    width: 40%;
+                    margin: 11px 0;
+                    font-weight: bold;
+                    border: 3px solid #5173ed;
+                    border-radius: 10px;
+                    color: #5173ed;
+                    cursor: pointer;
+                    transition: .3s;
+                    background: #fff;
+                    &:hover{
+                        color: #fff;
+                        background: #5173ed;
+                    }
+                }
+            }
+        }
+    }
+}
