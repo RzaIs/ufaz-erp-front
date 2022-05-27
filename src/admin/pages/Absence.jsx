@@ -31,7 +31,8 @@ export default function Absence() {
           <div key={lesson.lessonId} className='lesson'>
             <div><span>Subject : </span>{lesson.subject.name}</div>
             <div><span>Week Day : </span>{weekDay(lesson.day)}</div>
-            <div><span>Day : </span>{lesson.week}</div>
+            <div><span>Week : </span>{lesson.week}</div>
+            <div><span>Lesson : </span>{lesson.period}</div>
             <div><span>Group : </span>{lesson.group.name}</div>
             <div><span>Teacher : </span>{lesson.teacher.firstName} {lesson.teacher.lastName}</div>
             <div>
